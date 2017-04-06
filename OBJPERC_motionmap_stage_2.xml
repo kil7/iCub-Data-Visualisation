@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cartesian.xsd">
+	<Map Index="4" DefaultRadius="10.000000" Dimensions="1">
+		<Dimension Min="0.000000" Max="300.000000" />
+		<Field Index="17" Radius="10.000000" Usage="4" Linked="1">
+			<Dimension Value="47.437500" />
+		</Field>
+		<Field Index="24" Radius="10.000000" Usage="19" Linked="1">
+			<Dimension Value="6.112500" />
+		</Field>
+		<Field Index="27" Radius="10.000000" Usage="8" Linked="1">
+			<Dimension Value="21.637500" />
+		</Field>
+		<Field Index="38" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="270.412500" />
+		</Field>
+		<Field Index="47" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="172.462500" />
+		</Field>
+		<Field Index="50" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="127.912500" />
+		</Field>
+		<Field Index="56" Radius="10.000000" Usage="5" Linked="1">
+			<Dimension Value="101.962500" />
+		</Field>
+		<Field Index="61" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="83.025000" />
+		</Field>
+		<Field Index="81" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="113.212500" />
+		</Field>
+		<Field Index="84" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="297.525000" />
+		</Field>
+		<Field Index="94" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="232.950000" />
+		</Field>
+	</Map>
+</root>

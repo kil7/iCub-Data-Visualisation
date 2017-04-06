@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <title>iCub Data Visualisation</title>
+    <meta charset="UTF-8" />
+    
+</head>
+<body>
+    <div class="header">
+        <h1><a href="./"><strong>iCub</strong></a></h1>
+        <p>Data Visualisation</p>    
+        <ul>
+            <a href="http://github.com">
+            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+            </a>
+        </ul>
+    </div>
+    <div class="titlebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gaze_maps.html">Gaze Maps</a></li>
+            <li><a href="edges_maps.html">Edges Maps</a></li>
+            <li><a href="colour_maps.html">Colour Maps</a></li>
+            <li><a href="brightness_maps.html">Brightness Maps</a></li>
+            <li><a href="" id="home">Motion Maps</a></li>
+            <li><a href="combinations.html">Data Combinations</a></li>
+        </ul>
+    </div>
+    <div    class="data">
+                <canvas id="myBarChart" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_0.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        console.log(y);
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+                            console.log(arrX);
+
+                            arrLab.push("Data Point " + i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                          console.log(chartData);
+                        var ctx = document.getElementById("myBarChart");
+                    var myBarChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 0',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart1" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_1.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        console.log(y);
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+                            console.log(arrX);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                          console.log(chartData);
+                        var ctx = document.getElementById("myBarChart1");
+                    var myBarChart1 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 1',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart2" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_2.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        console.log(y);
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+                            console.log(arrX);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                          console.log(chartData);
+                        var ctx = document.getElementById("myBarChart2");
+                    var myBarChart2 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 2',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart3" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_3.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart3");
+                    var myBarChart3 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 3',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart4" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_4.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart4");
+                    var myBarChart4 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 4',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart5" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_5.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart5");
+                    var myBarChart5 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 5',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart6" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_6.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart6");
+                    var myBarChart6 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 6',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart7" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_7.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart7");
+                    var myBarChart7 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 7',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart8" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_8.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart8");
+                    var myBarChart8 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 8',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+                <canvas id="myBarChart9" width="500" height="500"></canvas> 
+                <script>
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_motionmap_stage_9.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrX = [];
+                        var arrLab = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            arrX.push(xcoord);
+
+                            arrLab.push(i);
+                        }
+                        var chartData = [];
+                        arrX.forEach(function(e) {
+                          chartData.push(parseFloat(e));
+                      });
+                        var ctx = document.getElementById("myBarChart9");
+                    var myBarChart9 = new Chart(ctx, {
+                            type: 'bar',
+                            data: { 
+                                labels: arrLab,
+                                datasets: [
+                                {
+                                    label: 'Motion Map Month 9',
+                                    data: chartData,
+                                    backgroundColor:"#e57979",
+                                    hoverBackgroundColor: "#e57979",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                </script>
+
+                </div>
+
+            </body>
+            </html>

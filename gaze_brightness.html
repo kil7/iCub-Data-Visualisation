@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="https://github.com/chartjs/chartjs-color/blob/master/index.js" type="text/javascript" ></script>
+    <title>iCub Data Visualisation</title>
+    <meta charset="UTF-8" />
+    
+</head>
+<body>
+    <div class="header">
+        <h1><a href="./"><strong>iCub</strong></a></h1>
+        <p>Data Visualisation</p>    
+        <ul>
+            <a href="http://github.com">
+            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+            </a>
+        </ul>
+    </div>
+    <div class="titlebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gaze_maps.html">Gaze Maps</a></li>
+            <li><a href="edges_maps.html">Edges Maps</a></li>
+            <li><a href="colour_maps.html">Colour Maps</a></li>
+            <li><a href="brightness_maps.html">Brightness Maps</a></li>
+            <li><a href="motion_maps.html">Motion Maps</a></li>
+            <li><a href="combinations.html">Data Combinations</a></li>
+        </ul>
+    </div>
+    <div    class="data">
+            <h2>Gaze Maps Showing Brightness of Objects (More Intense Colour is Brighter)</h2>
+            <canvas id="myChart" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_gazemap_stage_0.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        if (window.XMLHttpRequest)
+                                   {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                    xmlhttpbrightness=new XMLHttpRequest();
+                                }
+                                else
+                                   {    // code for IE6, IE5
+                                    xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
+                                }
+                                xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_0.xml",false);
+                                xmlhttpbrightness.send();
+                                xmlDocBright=xmlhttpbrightness.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        z = xmlDocBright.getElementsByTagName("Field");
+                        console.log(z);
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        var arrB = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }
+
+                        for (j = 0; j < z.length; j++) {
+                            var firstRowB = xmlDocBright.getElementsByTagName("Field")[j];
+                            xCoordsRowB = firstRowB.getElementsByTagName("Dimension")[0];
+                            brightness = xCoordsRowB.getAttribute("Value");
+                            arrB.push(brightness);
+
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]), 
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+                        var ctx = document.getElementById("myChart");
+                        var myChart = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'Gaze Map Month 0',
+                                    data: chartData,
+                                    backgroundColor:"#FF6384",
+                                    hoverBackgroundColor: "#FF6384",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <script>
+                        var myLineChart = new Chart(ctx).Line(data, options);
+
+                        var data = {
+                            labels: ["January", "February", "March", "April", "May", "June", "July"],
+                            datasets: [
+                                {
+                                    label: "My First dataset",
+                                    fillColor: dynamicColors(),
+                                    strokeColor: dynamicColors(),
+                                    pointColor: dynamicColors(),
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: "rgba(220,220,220,1)",
+                                    data: [65, 59, 80, 81, 56, 55, 40]
+                                },
+                                {
+                                    label: "My Second dataset",
+                                    fillColor: dynamicColors(),
+                                    strokeColor: dynamicColors(),
+                                    pointColor: dynamicColors(),
+                                    pointStrokeColor: "#fff",
+                                    pointHighlightFill: "#fff",
+                                    pointHighlightStroke: dynamicColors(),
+                                    data: [28, 48, 40, 19, 86, 27, 90]
+                                }
+                            ]
+                        };
+
+
+                        var dynamicColors = function() {
+                            var r = Math.floor(Math.random() * 255);
+                            var g = Math.floor(Math.random() * 255);
+                            var b = Math.floor(Math.random() * 255);
+                            return "rgb(" + r + "," + g + "," + b + ")";
+                        }
+
+                    </script>
+                </div>
+
+            </body>
+            </html>

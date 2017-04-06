@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <title>iCub Data Visualisation</title>
+    <meta charset="UTF-8" />
+    
+</head>
+<body>
+    <div class="header">
+        <h1><a href="./"><strong>iCub</strong></a></h1>
+        <p>Data Visualisation</p>    
+        <ul>
+            <a href="http://github.com">
+            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+            </a>
+        </ul>
+    </div>
+    <div class="titlebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gaze_maps.html">Gaze Maps</a></li>
+            <li><a href="edges_maps.html">Edges Maps</a></li>
+            <li><a href="colour_maps.html">Colour Maps</a></li>
+            <li><a href="brightness_maps.html" id="home">Brightness Maps</a></li>
+            <li><a href="motion_maps.html">Motion Maps</a></li>
+            <li><a href="combinations.html">Data Combinations</a></li>
+        </ul>
+    </div>
+    <div    class="data">
+        <div class = "graph">
+            <canvas id="myBrightnessChart0" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_0.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad)
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("myBrightnessChart0");
+                        var myBrightnessChart0 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'Brightness Map Month 0',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script> 
+                </div>
+                <canvas id="mybrightnessChart1" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_1.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart1");
+                        var mybrightnessChart1 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 1',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart2" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_2.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart2");
+                        var mybrightnessChart2 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 2',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart3" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_3.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart3");
+                        var mybrightnessChart3 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 3',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart4" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_4.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart4");
+                        var mybrightnessChart4 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 4',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart5" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_5.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart5");
+                        var mybrightnessChart5 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 5',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart6" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_6.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart6");
+                        var mybrightnessChart6 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 6',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart7" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_7.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart7");
+                        var mybrightnessChart7 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 7',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart8" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_8.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart8");
+                        var mybrightnessChart8 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 8',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                    <canvas id="mybrightnessChart9" width="500" height="500"></canvas>    
+                    <script>
+                if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp.open("GET","OBJPERC_brightnessmap_stage_9.xml",false);
+                        xmlhttp.send();
+                        xmlDoc=xmlhttp.responseXML;
+
+                        x = xmlDoc.documentElement.childNodes;
+                        y = xmlDoc.getElementsByTagName("Field");
+                        var arrRad = [];
+                        var arrY = [];
+                        var arrX = [];
+                        for (i = 0; i < y.length; i++) {
+                            var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                            var radius = firstRow.getAttribute("Radius");
+                            console.log(radius);
+                            arrRad.push(radius);
+
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xcoord = xCoordsRow.getAttribute("Value");
+                            console.log(xcoord);
+                            arrX.push(xcoord);
+
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            ycoord = yCoordsRow.getAttribute("Value");
+                            console.log(ycoord);
+                            arrY.push(ycoord);
+                        }   
+                        console.log(arrX);
+                        console.log(arrY);
+                        console.log(arrRad);
+                        var data = arrX.concat(arrY, arrRad);
+                        console.log(data);
+
+                        var chartData = [];
+                        arrX.forEach(function(e, i) {
+                          chartData.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY[i]),
+                            r: parseFloat(arrRad[i]),
+                        });
+                      });
+
+                        console.log(chartData);
+                        var ctx = document.getElementById("mybrightnessChart9");
+                        var mybrightnessChart9 = new Chart(ctx, {
+                            type: 'bubble',
+                            data: { 
+                                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                datasets: [
+                                {
+                                    label: 'brightness Map Month 9',
+                                    data: chartData,
+                                    backgroundColor:"#cc9339",
+                                    hoverBackgroundColor: "#cc9339",
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            beginAtZero:true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>   
+
+                </div>
+
+            </body>
+            </html>

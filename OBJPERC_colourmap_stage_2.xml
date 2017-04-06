@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cartesian.xsd">
+	<Map Index="1" DefaultRadius="10.000000" Dimensions="3">
+		<Dimension Min="0.000000" Max="180.000000" />
+		<Dimension Min="0.000000" Max="255.000000" />
+		<Dimension Min="0.000000" Max="300.000000" />
+	</Map>
+</root>
