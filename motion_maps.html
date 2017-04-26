@@ -32,6 +32,388 @@
         </ul>
     </div>
     <div    class="data">
+    <h2>Motion Data for all 9 Months</h2>
+    <p>Click the chart legend to hide data for a specific month.</p>
+    <canvas id="myBarChartAll" width="500" height="500"></canvas> 
+    <script>
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp0=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp0=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp0.open("GET","OBJPERC_motionmap_stage_0.xml",false);
+            xmlhttp0.send();
+            xmlDoc0=xmlhttp0.responseXML;
+            x0 = xmlDoc0.documentElement.childNodes;
+            y0 = xmlDoc0.getElementsByTagName("Field");
+            var arrX0 = [];
+            var arrLab0 = [];
+            for (i = 0; i < y0.length; i++) {
+                var firstRow0 = xmlDoc0.getElementsByTagName("Field")[i];
+
+                xCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[0];
+                xcoord0 = xCoordsRow0.getAttribute("Value");
+                arrX0.push(xcoord0);
+
+                arrLab0.push("Data Point " + i);
+            }
+            var chartData0 = [];
+            arrX0.forEach(function(e) {
+              chartData0.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp1=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp1=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp1.open("GET","OBJPERC_motionmap_stage_1.xml",false);
+            xmlhttp1.send();
+            xmlDoc1=xmlhttp1.responseXML;
+            x1 = xmlDoc1.documentElement.childNodes;
+            y1 = xmlDoc1.getElementsByTagName("Field");
+            var arrX1 = [];
+            var arrLab1 = [];
+            for (i = 0; i < y1.length; i++) {
+                var firstRow1 = xmlDoc1.getElementsByTagName("Field")[i];
+
+                xCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[0];
+                xcoord1 = xCoordsRow1.getAttribute("Value");
+                arrX1.push(xcoord1);
+
+                arrLab1.push("Data Point " + i);
+            }
+            var chartData1 = [];
+            arrX1.forEach(function(e) {
+              chartData1.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp2=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp2.open("GET","OBJPERC_motionmap_stage_2.xml",false);
+            xmlhttp2.send();
+            xmlDoc2=xmlhttp2.responseXML;
+            x2 = xmlDoc2.documentElement.childNodes;
+            y2 = xmlDoc2.getElementsByTagName("Field");
+            var arrX2 = [];
+            var arrLab2 = [];
+            for (i = 0; i < y2.length; i++) {
+                var firstRow2 = xmlDoc2.getElementsByTagName("Field")[i];
+
+                xCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[0];
+                xcoord2 = xCoordsRow2.getAttribute("Value");
+                arrX2.push(xcoord2);
+
+                arrLab2.push("Data Point " + i);
+            }
+            var chartData2 = [];
+            arrX2.forEach(function(e) {
+              chartData2.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp3=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp3.open("GET","OBJPERC_motionmap_stage_3.xml",false);
+            xmlhttp3.send();
+            xmlDoc3=xmlhttp3.responseXML;
+            x3 = xmlDoc3.documentElement.childNodes;
+            y3 = xmlDoc3.getElementsByTagName("Field");
+            var arrX3 = [];
+            var arrLab3 = [];
+            for (i = 0; i < y3.length; i++) {
+                var firstRow3 = xmlDoc3.getElementsByTagName("Field")[i];
+
+                xCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[0];
+                xcoord3 = xCoordsRow3.getAttribute("Value");
+                arrX3.push(xcoord3);
+
+                arrLab3.push("Data Point " + i);
+            }
+            var chartData3 = [];
+            arrX3.forEach(function(e) {
+              chartData3.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp4=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp4.open("GET","OBJPERC_motionmap_stage_4.xml",false);
+            xmlhttp4.send();
+            xmlDoc4=xmlhttp4.responseXML;
+            x4 = xmlDoc4.documentElement.childNodes;
+            y4 = xmlDoc4.getElementsByTagName("Field");
+            var arrX4 = [];
+            var arrLab4 = [];
+            for (i = 0; i < y4.length; i++) {
+                var firstRow4 = xmlDoc4.getElementsByTagName("Field")[i];
+
+                xCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[0];
+                xcoord4 = xCoordsRow4.getAttribute("Value");
+                arrX4.push(xcoord4);
+
+                arrLab4.push("Data Point " + i);
+            }
+            var chartData4 = [];
+            arrX4.forEach(function(e) {
+              chartData4.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp5=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp5=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp5.open("GET","OBJPERC_motionmap_stage_5.xml",false);
+            xmlhttp5.send();
+            xmlDoc5=xmlhttp5.responseXML;
+            x5 = xmlDoc5.documentElement.childNodes;
+            y5 = xmlDoc5.getElementsByTagName("Field");
+            var arrX5 = [];
+            var arrLab5 = [];
+            for (i = 0; i < y5.length; i++) {
+                var firstRow5 = xmlDoc5.getElementsByTagName("Field")[i];
+
+                xCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[0];
+                xcoord5 = xCoordsRow5.getAttribute("Value");
+                arrX5.push(xcoord5);
+
+                arrLab5.push("Data Point " + i);
+            }
+            var chartData5 = [];
+            arrX5.forEach(function(e) {
+              chartData5.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp6=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp6=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp6.open("GET","OBJPERC_motionmap_stage_6.xml",false);
+            xmlhttp6.send();
+            xmlDoc6=xmlhttp6.responseXML;
+            x6 = xmlDoc6.documentElement.childNodes;
+            y6 = xmlDoc6.getElementsByTagName("Field");
+            var arrX6 = [];
+            var arrLab6 = [];
+            for (i = 0; i < y6.length; i++) {
+                var firstRow6 = xmlDoc6.getElementsByTagName("Field")[i];
+
+                xCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[0];
+                xcoord6 = xCoordsRow6.getAttribute("Value");
+                arrX6.push(xcoord6);
+
+                arrLab6.push("Data Point " + i);
+            }
+            var chartData6 = [];
+            arrX6.forEach(function(e) {
+              chartData6.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp7=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp7=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp7.open("GET","OBJPERC_motionmap_stage_7.xml",false);
+            xmlhttp7.send();
+            xmlDoc7=xmlhttp7.responseXML;
+            x7 = xmlDoc7.documentElement.childNodes;
+            y7 = xmlDoc7.getElementsByTagName("Field");
+            var arrX7 = [];
+            var arrLab7 = [];
+            for (i = 0; i < y7.length; i++) {
+                var firstRow7 = xmlDoc7.getElementsByTagName("Field")[i];
+
+                xCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[0];
+                xcoord7 = xCoordsRow7.getAttribute("Value");
+                arrX7.push(xcoord7);
+
+                arrLab7.push("Data Point " + i);
+            }
+            var chartData7 = [];
+            arrX7.forEach(function(e) {
+              chartData7.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp8=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp8=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp8.open("GET","OBJPERC_motionmap_stage_8.xml",false);
+            xmlhttp8.send();
+            xmlDoc8=xmlhttp8.responseXML;
+            x8 = xmlDoc8.documentElement.childNodes;
+            y8 = xmlDoc8.getElementsByTagName("Field");
+            var arrX8 = [];
+            var arrLab8 = [];
+            for (i = 0; i < y8.length; i++) {
+                var firstRow8 = xmlDoc8.getElementsByTagName("Field")[i];
+
+                xCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[0];
+                xcoord8 = xCoordsRow8.getAttribute("Value");
+                arrX8.push(xcoord8);
+
+                arrLab8.push("Data Point " + i);
+            }
+            var chartData8 = [];
+            arrX8.forEach(function(e) {
+              chartData8.push(parseFloat(e));
+          });
+
+        if (window.XMLHttpRequest)
+               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp9=new XMLHttpRequest();
+            }
+            else
+               {    // code for IE6, IE5
+                xmlhttp9=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp9.open("GET","OBJPERC_motionmap_stage_9.xml",false);
+            xmlhttp9.send();
+            xmlDoc9=xmlhttp9.responseXML;
+            x9 = xmlDoc9.documentElement.childNodes;
+            y9 = xmlDoc9.getElementsByTagName("Field");
+            var arrX9 = [];
+            var arrLab9 = [];
+            for (i = 0; i < y9.length; i++) {
+                var firstRow9 = xmlDoc9.getElementsByTagName("Field")[i];
+
+                xCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[0];
+                xcoord9 = xCoordsRow9.getAttribute("Value");
+                arrX9.push(xcoord9);
+
+                arrLab9.push("Data Point " + i);
+            }
+            var chartData9 = [];
+            arrX9.forEach(function(e) {
+              chartData9.push(parseFloat(e));
+          });
+            var ctx = document.getElementById("myBarChartAll");
+        var myBarChartAll = new Chart(ctx, {
+                type: 'bar',
+                data: { 
+                    labels: arrLab9,
+                    datasets: [
+                    {
+                        label: 'Motion Map Month 0',
+                        data: chartData0,
+                        backgroundColor:"#d83737",
+                        hoverBackgroundColor: "#d83737",
+                    },
+                    {
+                        label: 'Motion Map Month 2',
+                        data: chartData1,
+                        backgroundColor:"#db4848",
+                        hoverBackgroundColor: "#db4848",
+                    },
+                    {
+                        label: 'Motion Map Month 2',
+                        data: chartData2,
+                        backgroundColor:"#df5858",
+                        hoverBackgroundColor: "#df5858",
+                    },
+                    {
+                        label: 'Motion Map Month 3',
+                        data: chartData3,
+                        backgroundColor:"#e26969",
+                        hoverBackgroundColor: "#e26969",
+                    },
+                    {
+                        label: 'Motion Map Month 4',
+                        data: chartData4,
+                        backgroundColor:"#e57979",
+                        hoverBackgroundColor: "#e57979",
+                    },
+                    {
+                        label: 'Motion Map Month 5',
+                        data: chartData5,
+                        backgroundColor:"#e88989",
+                        hoverBackgroundColor: "#e88989",
+                    },
+                    {
+                        label: 'Motion Map Month 6',
+                        data: chartData6,
+                        backgroundColor:"#eb9a9a",
+                        hoverBackgroundColor: "#eb9a9a",
+                    },
+                    {
+                        label: 'Motion Map Month 7',
+                        data: chartData7,
+                        backgroundColor:"#efaaaa",
+                        hoverBackgroundColor: "#efaaaa",
+                    },
+                    {
+                        label: 'Motion Map Month 8',
+                        data: chartData8,
+                        backgroundColor:"#f2bbbb",
+                        hoverBackgroundColor: "#f2bbbb",
+                    },
+                    {
+                        label: 'Motion Map Month 9',
+                        data: chartData9,
+                        backgroundColor:"#f5cbcb",
+                        hoverBackgroundColor: "#f5cbcb",
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            },
+                            scaleLabel: {
+                                    display: true,
+                                    labelString: 'Intensity of Motion'
+                                  }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero:true
+                            }
+                        }]
+                    }
+                }
+            });
+    </script>
+    <h2>Individual Charts Months 0 - 9</h2>
+
                 <canvas id="myBarChart" width="500" height="500"></canvas> 
                 <script>
                     if (window.XMLHttpRequest)

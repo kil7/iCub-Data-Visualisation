@@ -32,7 +32,490 @@
         </ul>
     </div>
     <div    class="data">
-        <div class = "graph">
+    <h2>Chart Showing All 9 Months</h2>
+    <p>Click the legend for the graph to hide that specific dataset, you will need to hide all datasets above the month you are intending to view as the later datasets will also contain data from earlier months.</p>
+    <p>Chart data starts at month three as no edge data was detected for prior months.</p>
+    <canvas id="myChartAll" width="500" height="500"></canvas>    
+    <script>
+        if (window.XMLHttpRequest)
+                   {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp0=new XMLHttpRequest();
+                }
+                else
+                   {    // code for IE6, IE5
+                    xmlhttp0=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp0.open("GET","OBJPERC_edgesmap_stage_0.xml",false);
+                xmlhttp0.send();
+                xmlDoc0=xmlhttp0.responseXML;
+
+                x0 = xmlDoc0.documentElement.childNodes;
+                y0 = xmlDoc0.getElementsByTagName("Field");
+                var arrRad0 = [];
+                var arrY0 = [];
+                var arrX0 = [];
+                for (i = 0; i < y0.length; i++) {
+                    var firstRow0 = xmlDoc0.getElementsByTagName("Field")[i];
+                    var radius0 = firstRow0.getAttribute("Radius");
+                    arrRad0.push(radius0);
+
+                    xCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[0];
+                    xcoord0 = xCoordsRow0.getAttribute("Value");
+                    arrX0.push(xcoord0);
+
+                    yCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[1];
+                    ycoord0 = yCoordsRow0.getAttribute("Value");
+                    arrY0.push(ycoord0);
+                }   
+
+                var chartData0 = [];
+                arrX0.forEach(function(e, i) {
+                  chartData0.push({
+                    x: parseFloat(e),
+                    y: parseFloat(arrY0[i]),
+                    r: parseFloat(arrRad0[i]),
+                });
+              });
+
+                if (window.XMLHttpRequest)
+                       {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp1=new XMLHttpRequest();
+                    }
+                    else
+                       {    // code for IE6, IE5
+                        xmlhttp1=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp1.open("GET","OBJPERC_edgesmap_stage_1.xml",false);
+                    xmlhttp1.send();
+                    xmlDoc1=xmlhttp1.responseXML;
+
+                    x1 = xmlDoc1.documentElement.childNodes;
+                    y1 = xmlDoc1.getElementsByTagName("Field");
+                    var arrRad1 = [];
+                    var arrY1 = [];
+                    var arrX1 = [];
+                    for (j = 0; j <y1.length; j++) {
+                        var firstRow1 = xmlDoc1.getElementsByTagName("Field")[j];
+                        var radius1 = firstRow1.getAttribute("Radius");
+                        arrRad1.push(radius1);
+
+                        xCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[0];
+                        xcoord1 = xCoordsRow1.getAttribute("Value");
+                        arrX1.push(xcoord1);
+
+                        yCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[1];
+                        ycoord1 = yCoordsRow1.getAttribute("Value");
+                        arrY1.push(ycoord1);
+                    }   
+
+                    var chartData1 = [];
+                    arrX1.forEach(function(e, i) {
+                      chartData1.push({
+                        x: parseFloat(e),
+                        y: parseFloat(arrY1[i]),
+                        r: parseFloat(arrRad1[i]),
+                    });
+                  });
+                    console.log("incoming chart data");
+                    console.log(chartData0);
+                    console.log(chartData1);
+
+                    if (window.XMLHttpRequest)
+                           {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp2=new XMLHttpRequest();
+                        }
+                        else
+                           {    // code for IE6, IE5
+                            xmlhttp2=new ActiveXObject("Microsoft.XMLHTTP");
+                        }
+                        xmlhttp2.open("GET","OBJPERC_edgesmap_stage_2.xml",false);
+                        xmlhttp2.send();
+                        xmlDoc2=xmlhttp2.responseXML;
+
+                        x2 = xmlDoc2.documentElement.childNodes;
+                        y2 = xmlDoc2.getElementsByTagName("Field");
+                        var arrRad2 = [];
+                        var arrY2 = [];
+                        var arrX2 = [];
+                        for (j = 0; j <y2.length; j++) {
+                            var firstRow2 = xmlDoc2.getElementsByTagName("Field")[j];
+                            var radius2 = firstRow2.getAttribute("Radius");
+                            arrRad2.push(radius2);
+
+                            xCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[0];
+                            xcoord2 = xCoordsRow2.getAttribute("Value");
+                            arrX2.push(xcoord2);
+
+                            yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
+                            ycoord2 = yCoordsRow2.getAttribute("Value");
+                            arrY2.push(ycoord2);
+                        }   
+
+                        var chartData2 = [];
+                        arrX2.forEach(function(e, i) {
+                          chartData2.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY2[i]),
+                            r: parseFloat(arrRad2[i]),
+                        });
+                      });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp3=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp3=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp3.open("GET","OBJPERC_edgesmap_stage_3.xml",false);
+                            xmlhttp3.send();
+                            xmlDoc3=xmlhttp3.responseXML;
+
+                            x3 = xmlDoc3.documentElement.childNodes;
+                            y3 = xmlDoc3.getElementsByTagName("Field");
+                            var arrRad3 = [];
+                            var arrY3 = [];
+                            var arrX3 = [];
+                            for (j = 0; j <y3.length; j++) {
+                                var firstRow3 = xmlDoc3.getElementsByTagName("Field")[j];
+                                var radius3 = firstRow3.getAttribute("Radius");
+                                arrRad3.push(radius3);
+
+                                xCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[0];
+                                xcoord3 = xCoordsRow3.getAttribute("Value");
+                                arrX3.push(xcoord3);
+
+                                yCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[1];
+                                ycoord3 = yCoordsRow3.getAttribute("Value");
+                                arrY3.push(ycoord3);
+                            }   
+
+                            var chartData3 = [];
+                            arrX3.forEach(function(e, i) {
+                              chartData3.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY3[i]),
+                                r: parseFloat(arrRad3[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp4=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp4=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp4.open("GET","OBJPERC_edgesmap_stage_4.xml",false);
+                            xmlhttp4.send();
+                            xmlDoc4=xmlhttp4.responseXML;
+
+                            x4 = xmlDoc4.documentElement.childNodes;
+                            y4 = xmlDoc4.getElementsByTagName("Field");
+                            var arrRad4 = [];
+                            var arrY4 = [];
+                            var arrX4 = [];
+                            for (j = 0; j <y4.length; j++) {
+                                var firstRow4 = xmlDoc4.getElementsByTagName("Field")[j];
+                                var radius4 = firstRow4.getAttribute("Radius");
+                                arrRad4.push(radius4);
+
+                                xCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[0];
+                                xcoord4 = xCoordsRow4.getAttribute("Value");
+                                arrX4.push(xcoord4);
+
+                                yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
+                                ycoord4 = yCoordsRow4.getAttribute("Value");
+                                arrY4.push(ycoord4);
+                            }   
+
+                            var chartData4 = [];
+                            arrX4.forEach(function(e, i) {
+                              chartData4.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY4[i]),
+                                r: parseFloat(arrRad4[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp5=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp5=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp5.open("GET","OBJPERC_edgesmap_stage_5.xml",false);
+                            xmlhttp5.send();
+                            xmlDoc5=xmlhttp5.responseXML;
+
+                            x5 = xmlDoc5.documentElement.childNodes;
+                            y5 = xmlDoc5.getElementsByTagName("Field");
+                            var arrRad5 = [];
+                            var arrY5 = [];
+                            var arrX5 = [];
+                            for (j = 0; j <y5.length; j++) {
+                                var firstRow5 = xmlDoc5.getElementsByTagName("Field")[j];
+                                var radius5 = firstRow5.getAttribute("Radius");
+                                arrRad5.push(radius5);
+
+                                xCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[0];
+                                xcoord5 = xCoordsRow5.getAttribute("Value");
+                                arrX5.push(xcoord5);
+
+                                yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
+                                ycoord5 = yCoordsRow5.getAttribute("Value");
+                                arrY5.push(ycoord5);
+                            }   
+
+                            var chartData5 = [];
+                            arrX5.forEach(function(e, i) {
+                              chartData5.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY5[i]),
+                                r: parseFloat(arrRad5[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp6=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp6=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp6.open("GET","OBJPERC_edgesmap_stage_6.xml",false);
+                            xmlhttp6.send();
+                            xmlDoc6=xmlhttp6.responseXML;
+
+                            x6 = xmlDoc6.documentElement.childNodes;
+                            y6 = xmlDoc6.getElementsByTagName("Field");
+                            var arrRad6 = [];
+                            var arrY6 = [];
+                            var arrX6 = [];
+                            for (j = 0; j <y6.length; j++) {
+                                var firstRow6 = xmlDoc6.getElementsByTagName("Field")[j];
+                                var radius6 = firstRow6.getAttribute("Radius");
+                                arrRad6.push(radius6);
+
+                                xCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[0];
+                                xcoord6 = xCoordsRow6.getAttribute("Value");
+                                arrX6.push(xcoord6);
+
+                                yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
+                                ycoord6 = yCoordsRow6.getAttribute("Value");
+                                arrY6.push(ycoord6);
+                            }   
+
+                            var chartData6 = [];
+                            arrX6.forEach(function(e, i) {
+                              chartData6.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY6[i]),
+                                r: parseFloat(arrRad6[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp7=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp7=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp7.open("GET","OBJPERC_edgesmap_stage_7.xml",false);
+                            xmlhttp7.send();
+                            xmlDoc7=xmlhttp7.responseXML;
+
+                            x7 = xmlDoc7.documentElement.childNodes;
+                            y7 = xmlDoc7.getElementsByTagName("Field");
+                            var arrRad7 = [];
+                            var arrY7 = [];
+                            var arrX7 = [];
+                            for (j = 0; j <y7.length; j++) {
+                                var firstRow7 = xmlDoc7.getElementsByTagName("Field")[j];
+                                var radius7 = firstRow7.getAttribute("Radius");
+                                arrRad7.push(radius7);
+
+                                xCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[0];
+                                xcoord7 = xCoordsRow7.getAttribute("Value");
+                                arrX7.push(xcoord7);
+
+                                yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
+                                ycoord7 = yCoordsRow7.getAttribute("Value");
+                                arrY7.push(ycoord7);
+                            }   
+
+                            var chartData7 = [];
+                            arrX7.forEach(function(e, i) {
+                              chartData7.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY7[i]),
+                                r: parseFloat(arrRad7[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp8=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp8=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp8.open("GET","OBJPERC_edgesmap_stage_8.xml",false);
+                            xmlhttp8.send();
+                            xmlDoc8=xmlhttp8.responseXML;
+
+                            x8 = xmlDoc8.documentElement.childNodes;
+                            y8 = xmlDoc8.getElementsByTagName("Field");
+                            var arrRad8 = [];
+                            var arrY8 = [];
+                            var arrX8 = [];
+                            for (j = 0; j <y8.length; j++) {
+                                var firstRow8 = xmlDoc8.getElementsByTagName("Field")[j];
+                                var radius8 = firstRow8.getAttribute("Radius");
+                                arrRad8.push(radius8);
+
+                                xCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[0];
+                                xcoord8 = xCoordsRow8.getAttribute("Value");
+                                arrX8.push(xcoord8);
+
+                                yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
+                                ycoord8 = yCoordsRow8.getAttribute("Value");
+                                arrY8.push(ycoord8);
+                            }   
+
+                            var chartData8 = [];
+                            arrX8.forEach(function(e, i) {
+                              chartData8.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY8[i]),
+                                r: parseFloat(arrRad8[i]),
+                            });
+                          });
+
+                        if (window.XMLHttpRequest)
+                               {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                xmlhttp9=new XMLHttpRequest();
+                            }
+                            else
+                               {    // code for IE6, IE5
+                                xmlhttp9=new ActiveXObject("Microsoft.XMLHTTP");
+                            }
+                            xmlhttp9.open("GET","OBJPERC_edgesmap_stage_9.xml",false);
+                            xmlhttp9.send();
+                            xmlDoc9=xmlhttp9.responseXML;
+
+                            x9 = xmlDoc9.documentElement.childNodes;
+                            y9 = xmlDoc9.getElementsByTagName("Field");
+                            var arrRad9 = [];
+                            var arrY9 = [];
+                            var arrX9 = [];
+                            for (j = 0; j <y9.length; j++) {
+                                var firstRow9 = xmlDoc9.getElementsByTagName("Field")[j];
+                                var radius9 = firstRow9.getAttribute("Radius");
+                                arrRad9.push(radius9);
+
+                                xCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[0];
+                                xcoord9 = xCoordsRow9.getAttribute("Value");
+                                arrX9.push(xcoord9);
+
+                                yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
+                                ycoord9 = yCoordsRow9.getAttribute("Value");
+                                arrY9.push(ycoord9);
+                            }   
+
+                            var chartData9 = [];
+                            arrX9.forEach(function(e, i) {
+                              chartData9.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY9[i]),
+                                r: parseFloat(arrRad9[i]),
+                            });
+                          });
+
+
+                var ctx = document.getElementById("myChartAll");
+                var myChartAll = new Chart(ctx, {
+                    type: 'bubble',
+                    data: { 
+                        labels: ["Edges Map Month 0", "Edges Map Month 1", "Edges Map Month 2", "Edges Map Month 3", "Edges Map Month 4", "Edges Map Month 5", "Edges Map Month 6", "Edges Map Month 7", "Edges Map Month 8", "Edges Map Month 9"],
+                        datasets: [
+                        {
+                            label: 'Edges Map Month 3',
+                            data: chartData3,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        },
+                        {
+                            label: 'Edges Map Month 4',
+                            data: chartData4,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+
+                        },
+                        {
+                            label: 'Edges Map Month 5',
+                            data: chartData5,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        },
+                        {
+                            label: 'Edges Map Month 6',
+                            data: chartData6,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        },
+                        {
+                            label: 'Edges Map Month 7',
+                            data: chartData7,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        },
+                        {
+                            label: 'Edges Map Month 8',
+                            data: chartData8,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        },
+                        {
+                            label: 'Edges Map Month 9',
+                            data: chartData9,
+                            backgroundColor:"#429bf4",
+                            hoverBackgroundColor: "#429bf4",
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                },
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Horizontal'
+                                      }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                },
+                                scaleLabel: {
+                                        display: true,
+                                        labelString: 'Perimeter of Object'
+                                      }
+                            }]
+                        }
+                    }
+                });
+            </script> 
+            <h2>Individual Charts Months 0 - 9</h2>
             <canvas id="myEdgesChart0" width="500" height="500"></canvas>    
             <script>
                 if (window.XMLHttpRequest)
@@ -113,7 +596,6 @@
                             }
                         });
                     </script> 
-                </div>
                 <canvas id="myEdgesChart1" width="500" height="500"></canvas>    
             <script>
                 if (window.XMLHttpRequest)
