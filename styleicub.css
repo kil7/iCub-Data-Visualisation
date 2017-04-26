@@ -109,8 +109,8 @@
 
 	.gymimage img {
 		float: right;
-		padding-left: 10px;
-		padding-bottom: 10px;
+		border: 1px solid #ccc;
+		margin-left: 3%;
 	}
 
 	.userimg img {
