@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mappings.xsd">
+		<Mapping Index="8" OneIndex="6" TwoIndex="5" Weight="2.450287" Usage="23" TimeStamp="1460616192" Bidirectional="0" />
+		<Mapping Index="12" OneIndex="10" TwoIndex="9" Weight="6.545466" Usage="3" TimeStamp="1460614682" Bidirectional="0" />
+		<Mapping Index="16" OneIndex="14" TwoIndex="13" Weight="1.690364" Usage="7" TimeStamp="1460615368" Bidirectional="0" />
+		<Mapping Index="19" OneIndex="14" TwoIndex="17" Weight="14.235416" Usage="0" TimeStamp="1460615550" Bidirectional="0" />
+		<Mapping Index="23" OneIndex="21" TwoIndex="20" Weight="2.011447" Usage="12" TimeStamp="1460615969" Bidirectional="0" />
+		<Mapping Index="26" OneIndex="21" TwoIndex="24" Weight="13.574207" Usage="0" TimeStamp="1460614375" Bidirectional="0" />
+		<Mapping Index="29" OneIndex="21" TwoIndex="27" Weight="14.510448" Usage="0" TimeStamp="1460614425" Bidirectional="0" />
+		<Mapping Index="31" OneIndex="14" TwoIndex="24" Weight="8.951393" Usage="3" TimeStamp="1460616135" Bidirectional="0" />
+		<Mapping Index="34" OneIndex="21" TwoIndex="32" Weight="6.223761" Usage="2" TimeStamp="1460616024" Bidirectional="0" />
+		<Mapping Index="37" OneIndex="35" TwoIndex="9" Weight="0.000000" Usage="1" TimeStamp="1460614583" Bidirectional="0" />
+		<Mapping Index="40" OneIndex="35" TwoIndex="38" Weight="11.676022" Usage="1" TimeStamp="1460614583" Bidirectional="0" />
+		<Mapping Index="43" OneIndex="21" TwoIndex="41" Weight="2.225562" Usage="5" TimeStamp="1460615986" Bidirectional="0" />
+		<Mapping Index="46" OneIndex="35" TwoIndex="44" Weight="6.397817" Usage="1" TimeStamp="1460614733" Bidirectional="0" />
+		<Mapping Index="49" OneIndex="35" TwoIndex="47" Weight="5.626152" Usage="1" TimeStamp="1460614733" Bidirectional="0" />
+		<Mapping Index="52" OneIndex="6" TwoIndex="50" Weight="8.437386" Usage="0" TimeStamp="1460614768" Bidirectional="0" />
+		<Mapping Index="55" OneIndex="14" TwoIndex="53" Weight="2.145373" Usage="22" TimeStamp="1460615961" Bidirectional="0" />
+		<Mapping Index="58" OneIndex="6" TwoIndex="56" Weight="5.565532" Usage="0" TimeStamp="1460615111" Bidirectional="0" />
+		<Mapping Index="60" OneIndex="6" TwoIndex="27" Weight="8.598510" Usage="0" TimeStamp="1460615845" Bidirectional="0" />
+		<Mapping Index="63" OneIndex="14" TwoIndex="61" Weight="14.402081" Usage="0" TimeStamp="1460615155" Bidirectional="0" />
+		<Mapping Index="83" OneIndex="14" TwoIndex="81" Weight="13.732234" Usage="0" TimeStamp="1460615339" Bidirectional="0" />
+		<Mapping Index="86" OneIndex="6" TwoIndex="84" Weight="10.366994" Usage="0" TimeStamp="1460615424" Bidirectional="0" />
+		<Mapping Index="88" OneIndex="14" TwoIndex="56" Weight="6.994360" Usage="0" TimeStamp="1460615688" Bidirectional="0" />
+		<Mapping Index="90" OneIndex="6" TwoIndex="24" Weight="12.215789" Usage="1" TimeStamp="1460616192" Bidirectional="0" />
+		<Mapping Index="93" OneIndex="14" TwoIndex="91" Weight="2.677002" Usage="2" TimeStamp="1460616001" Bidirectional="0" />
+		<Mapping Index="96" OneIndex="6" TwoIndex="94" Weight="12.782060" Usage="0" TimeStamp="1460615767" Bidirectional="0" />
+		<Mapping Index="98" OneIndex="6" TwoIndex="61" Weight="12.570177" Usage="0" TimeStamp="1460615785" Bidirectional="0" />
+		<Mapping Index="100" OneIndex="14" TwoIndex="27" Weight="10.513700" Usage="1" TimeStamp="1460616078" Bidirectional="0" />
+		<Mapping Index="103" OneIndex="14" TwoIndex="101" Weight="2.021008" Usage="5" TimeStamp="1460616135" Bidirectional="0" />
+		<Mapping Index="106" OneIndex="14" TwoIndex="104" Weight="0.942809" Usage="1" TimeStamp="1460616047" Bidirectional="0" />
+</root>
