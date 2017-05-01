@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="./js/toolkit.js" type="text/javascript"></script>
+    <title>iCub Data Visualisation</title>
+    <meta charset="UTF-8" />
+    
+</head>
+<body>
+    <div class="header">
+        <h1><a href="./"><strong>iCub</strong></a></h1>
+        <p>Data Visualisation</p>    
+        <ul>
+            <a href="https://github.com/kil7/iCub-Data-Visualisation">
+                <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+            </a>
+        </ul>
+    </div>
+    <div class="titlebar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gaze_maps.html">Gaze Maps</a></li>
+            <li><a href="edges_maps.html">Edges Maps</a></li>
+            <li><a href="colour_maps.html">Colour Maps</a></li>
+            <li><a href="brightness_maps.html">Brightness Maps</a></li>
+            <li><a href="motion_maps.html">Motion Maps</a></li>
+            <li><a href="combinations.html">Data Combinations</a></li>
+        </ul>
+    </div>
+    <div class="data">
+
+        <h2>Gaze Maps Showing Size & Colour of Objects</h2>
+        <canvas id="myChart" width="500" height="500"></canvas>    
+        <script>
+            if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+                else {    // code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.open("GET","OBJPERC_gazemap_stage_0.xml",false);
+                xmlhttp.send();
+                xmlDoc=xmlhttp.responseXML;
+
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpcolour=new XMLHttpRequest();
+                }
+                else {    // code for IE6, IE5
+                    xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_0.xml",false);
+                xmlhttpcolour.send();
+                xmlDocColour=xmlhttpcolour.responseXML;
+
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttpmappings=new XMLHttpRequest();
+                }
+                else {    // code for IE6, IE5
+                    xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttpmappings.open("GET","OBJPERC_mappings_stage_0.xml",false);
+                xmlhttpmappings.send();
+                xmlDocMap=xmlhttpmappings.responseXML;
+
+                x = xmlDoc.documentElement.childNodes;
+                y = xmlDoc.getElementsByTagName("Field");
+                z = xmlDocColour.getElementsByTagName("Field");
+                a = xmlDocMap.getElementsByTagName("Mapping");
+
+                var arrRad = [];
+                var arrY = [];
+                var arrX = [];
+                var arrB = [];
+
+                var arrGazeIndex = [];
+                var arrColourIndex = [];
+
+                var arrM1 = [];
+                var arrM2 = [];
+                for (i = 0; i < y.length; i++) {
+                    var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                    var radius = firstRow.getAttribute("Radius");
+                    arrRad.push(radius);
+
+                    var gazeIndex = firstRow.getAttribute("Index");
+                    arrGazeIndex.push(gazeIndex);
+                }
+
+                for (k = 0; k < a.length; k++) {
+                    var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                    var mapone = firstRowMap.getAttribute("OneIndex");
+                    arrM1.push(mapone);
+                    var maptwo = firstRowMap.getAttribute("TwoIndex");
+                    arrM2.push(maptwo);
+                }
+
+                for (j = 0; j < z.length; j++) {
+                    var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                    var colourIndex = firstRowC.getAttribute("Index");
+                    arrColourIndex.push(colourIndex);
+
+                }
+                var arrHue = [];
+                var arrSat = [];
+                var arrSize = [];
+                var arrGazeIndexTest = [];
+
+                var arrXTest = [];
+                var arrYTest = [];
+                for(i = 0; i <arrM1.length; i++) {
+                    if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                        var arrColourIndexTest = [];
+                        for (j = 0; j<z.length; j++) {
+                            var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                            xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                            ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                            zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                            hue = xCoordsRowCTest.getAttribute("Value");
+                            saturation = ycoordsRowCTest.getAttribute("Value");
+                            size = zcoordsRowCTest.getAttribute("Value");
+
+                            var hueFloat = parseFloat(hue/100);
+                            var hue = hueFloat.toString();
+
+
+                            //Potential to comment these two lines out for bigger and better bubbles!
+                            var satFloat = parseFloat(sat/1000);
+                            var sat = satFloat.toString();
+
+                            var colourIndexTest = firstRowCTest.getAttribute("Index");
+                            arrColourIndexTest.push(colourIndexTest);
+
+                            if (arrColourIndexTest[j] == arrM2[i]) {
+                                arrHue.push(hue);
+                                arrSat.push(saturation);
+                                arrSize.push(size);
+                            }
+
+                        }
+                        var arrGazeIndexTest2 = [];
+                        for (j = 0; j<y.length; j++) {
+                            var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                            xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                            yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                            xCoordTest = xCoordsRowTest.getAttribute("Value");
+                            yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                            var gazeIndexTest = firstRowTest.getAttribute("Index");
+                            arrGazeIndexTest2.push(gazeIndexTest);
+
+                            if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                arrXTest.push(xCoordTest);
+                                arrYTest.push(yCoordTest);
+
+                            }
+                        }
+                    }
+                }
+
+
+                var chartDataTest = [];
+                arrXTest.forEach(function(e, i) {
+                    chartDataTest.push({
+                        x: parseFloat(e),
+                        y: parseFloat(arrYTest[i]), 
+                        r: parseFloat(arrSize[i]),
+                    });
+                });
+
+                var rgbArray = [];
+                for (i = 0; i < arrHue.length; i++) {
+                    testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                    var str = objectToString(testest);
+                    var replaceR = str.replace(/r:'/g, '');
+                    var replaceG = replaceR.replace(/'g:'/g, ',');
+                    var replaceB = replaceG.replace(/',b:'/g, ',');
+                    var replaceEnd = replaceB.replace(/',/g, '');
+
+                    rgbArray.push('rgba(' + replaceEnd + ',0.3)');
+
+                }
+
+
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
+                    type: 'bubble',
+                    data: { 
+                        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                        datasets: [
+                        {
+                            label: 'Gaze & Colour Map Month 0',
+                            data: chartDataTest,
+                            backgroundColor: rgbArray,
+                            hoverBackgroundColor: rgbArray,
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                                    display: true,
+                                    text: 'Gaze & Colour Maps Month 0'
+                                },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    beginAtZero:true
+                                }
+                            }]
+                        }
+                    }
+                });
+            </script>
+
+            <canvas id="myChart1" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_1.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_1.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_1.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart1");
+                    var myChart1 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 1',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 1'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+
+
+            <canvas id="myChart2" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_2.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_2.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_2.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart2");
+                    var myChart2 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 2',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 2'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+
+
+            <canvas id="myChart3" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_3.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_3.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_3.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart3");
+                    var myChart3 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 3',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Gaze & Colour Maps Month 3'
+                                        },
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            <canvas id="myChart4" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_4.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_4.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_4.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart4");
+                    var myChart4 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 4',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 4'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            <canvas id="myChart5" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_5.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_5.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_5.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart5");
+                    var myChart5 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 5',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 5'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+
+            <canvas id="myChart6" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_6.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_6.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_6.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart6");
+                    var myChart6 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 6',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 6'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            <canvas id="myChart7" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_7.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_7.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_7.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart7");
+                    var myChart7 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 7',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 7'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            <canvas id="myChart8" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_8.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_8.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_8.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart8");
+                    var myChart8 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 8',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 8'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+
+            <canvas id="myChart9" width="500" height="500"></canvas>    
+            <script>
+                if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                    else {    // code for IE6, IE5
+                        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.open("GET","OBJPERC_gazemap_stage_9.xml",false);
+                    xmlhttp.send();
+                    xmlDoc=xmlhttp.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpcolour=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_9.xml",false);
+                    xmlhttpcolour.send();
+                    xmlDocColour=xmlhttpcolour.responseXML;
+
+                    if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttpmappings=new XMLHttpRequest();
+                    }
+                    else {    // code for IE6, IE5
+                        xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_9.xml",false);
+                    xmlhttpmappings.send();
+                    xmlDocMap=xmlhttpmappings.responseXML;
+
+                    x = xmlDoc.documentElement.childNodes;
+                    y = xmlDoc.getElementsByTagName("Field");
+                    z = xmlDocColour.getElementsByTagName("Field");
+                    a = xmlDocMap.getElementsByTagName("Mapping");
+
+                    var arrRad = [];
+                    var arrY = [];
+                    var arrX = [];
+                    var arrB = [];
+
+                    var arrGazeIndex = [];
+                    var arrColourIndex = [];
+
+                    var arrM1 = [];
+                    var arrM2 = [];
+                    for (i = 0; i < y.length; i++) {
+                        var firstRow = xmlDoc.getElementsByTagName("Field")[i];
+                        var radius = firstRow.getAttribute("Radius");
+                        arrRad.push(radius);
+
+                        var gazeIndex = firstRow.getAttribute("Index");
+                        arrGazeIndex.push(gazeIndex);
+                    }
+
+                    for (k = 0; k < a.length; k++) {
+                        var firstRowMap = xmlDocMap.getElementsByTagName("Mapping")[k];
+                        var mapone = firstRowMap.getAttribute("OneIndex");
+                        arrM1.push(mapone);
+                        var maptwo = firstRowMap.getAttribute("TwoIndex");
+                        arrM2.push(maptwo);
+                    }
+
+                    for (j = 0; j < z.length; j++) {
+                        var firstRowC = xmlDocColour.getElementsByTagName("Field")[j];
+                        var colourIndex = firstRowC.getAttribute("Index");
+                        arrColourIndex.push(colourIndex);
+
+                    }
+                    var arrHue = [];
+                    var arrSat = [];
+                    var arrSize = [];
+                    var arrGazeIndexTest = [];
+
+                    var arrXTest = [];
+                    var arrYTest = [];
+                    for(i = 0; i <arrM1.length; i++) {
+                        if(isIncluded(arrColourIndex, arrM2[i]) == true  && isIncluded(arrGazeIndex, arrM1[i]) == true) {
+                            var arrColourIndexTest = [];
+                            for (j = 0; j<z.length; j++) {
+                                var firstRowCTest = xmlDocColour.getElementsByTagName("Field")[j];
+                                xCoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[0];
+                                ycoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[1];
+                                zcoordsRowCTest = firstRowCTest.getElementsByTagName("Dimension")[2];
+
+                                hue = xCoordsRowCTest.getAttribute("Value");
+                                saturation = ycoordsRowCTest.getAttribute("Value");
+                                size = zcoordsRowCTest.getAttribute("Value");
+
+                                var hueFloat = parseFloat(hue/100);
+                                var hue = hueFloat.toString();
+
+
+                                //Potential to comment these two lines out for bigger and better bubbles!
+                                var satFloat = parseFloat(sat/1000);
+                                var sat = satFloat.toString();
+
+                                var colourIndexTest = firstRowCTest.getAttribute("Index");
+                                arrColourIndexTest.push(colourIndexTest);
+
+                                if (arrColourIndexTest[j] == arrM2[i]) {
+                                    arrHue.push(hue);
+                                    arrSat.push(saturation);
+                                    arrSize.push(size);
+                                }
+
+                            }
+                            var arrGazeIndexTest2 = [];
+                            for (j = 0; j<y.length; j++) {
+                                var firstRowTest = xmlDoc.getElementsByTagName("Field")[j];
+                                xCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[0];
+                                yCoordsRowTest = firstRowTest.getElementsByTagName("Dimension")[1];
+
+                                xCoordTest = xCoordsRowTest.getAttribute("Value");
+                                yCoordTest = yCoordsRowTest.getAttribute("Value");
+
+                                var gazeIndexTest = firstRowTest.getAttribute("Index");
+                                arrGazeIndexTest2.push(gazeIndexTest);
+
+                                if (arrGazeIndexTest2[j] == arrM1[i]) {
+                                    arrXTest.push(xCoordTest);
+                                    arrYTest.push(yCoordTest);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                    var chartDataTest = [];
+                    arrXTest.forEach(function(e, i) {
+                        chartDataTest.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrYTest[i]), 
+                            r: parseFloat(arrSize[i]),
+                        });
+                    });
+
+
+                    var rgbArray = [];
+                    for (i = 0; i < arrHue.length; i++) {
+                        testest = HSVtoRGB(parseFloat(arrHue[i]), parseFloat(arrSat[i]), 0.6);
+                        var str = objectToString(testest);
+                        var replaceR = str.replace(/r:'/g, '');
+                        var replaceG = replaceR.replace(/'g:'/g, ',');
+                        var replaceB = replaceG.replace(/',b:'/g, ',');
+                        var replaceEnd = replaceB.replace(/',/g, '');
+
+                        rgbArray.push('rgba(' + replaceEnd + ',0.2)');
+
+                    }
+
+
+                    var ctx = document.getElementById("myChart9");
+                    var myChart9 = new Chart(ctx, {
+                        type: 'bubble',
+                        data: { 
+                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                            datasets: [
+                            {
+                                label: 'Gaze & Colour Map Month 9',
+                                data: chartDataTest,
+                                backgroundColor: rgbArray,
+                                hoverBackgroundColor: rgbArray,
+                            }]
+                        },
+                        options: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                        display: true,
+                                        text: 'Gaze & Colour Maps Month 9'
+                                    },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </script>
+        </div>
+    </body>
+</html>>
