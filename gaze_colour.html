@@ -2,7 +2,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link rel="stylesheet" type="text/css" href="./css/styleicub.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script src="./js/toolkit.js" type="text/javascript"></script>
@@ -16,7 +16,7 @@
         <p>Data Visualisation</p>    
         <ul>
             <a href="https://github.com/kil7/iCub-Data-Visualisation">
-                <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+                <img id= "git" src="./images/GitHub-Mark-32px.png" alt="git">
             </a>
         </ul>
     </div>
@@ -34,6 +34,10 @@
     <div class="data">
 
         <h2>Gaze Maps Showing Size & Colour of Objects</h2>
+        <p> The mapping between gaze space and colour/hue is visualised in the following set of charts. The colour for each bubble is calculated from the iCub's HSV colour code logged when it detects a patch of colour. The size of each bubble represents the size of the colour patch.</p>
+
+        <p>No data is available for the first three months due to the iCub not detecting colour during that period of development.</p>
+        <hr>
         <canvas id="myChart" width="500" height="500"></canvas>    
         <script>
             if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -42,7 +46,7 @@
                 else {    // code for IE6, IE5
                     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttp.open("GET","OBJPERC_gazemap_stage_0.xml",false);
+                xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_0.xml",false);
                 xmlhttp.send();
                 xmlDoc=xmlhttp.responseXML;
 
@@ -52,7 +56,7 @@
                 else {    // code for IE6, IE5
                     xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_0.xml",false);
+                xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_0.xml",false);
                 xmlhttpcolour.send();
                 xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -62,7 +66,7 @@
                 else {    // code for IE6, IE5
                     xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttpmappings.open("GET","OBJPERC_mappings_stage_0.xml",false);
+                xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_0.xml",false);
                 xmlhttpmappings.send();
                 xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -232,7 +236,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_1.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_1.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -242,7 +246,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_1.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_1.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -252,7 +256,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_1.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_1.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -425,7 +429,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_2.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_2.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -435,7 +439,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_2.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_2.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -445,7 +449,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_2.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_2.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -618,7 +622,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_3.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_3.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -628,7 +632,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_3.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_3.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -638,7 +642,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_3.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_3.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -809,7 +813,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_4.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_4.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -819,7 +823,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_4.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_4.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -829,7 +833,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_4.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_4.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1000,7 +1004,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_5.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_5.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1010,7 +1014,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_5.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_5.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -1020,7 +1024,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_5.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_5.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1192,7 +1196,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_6.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_6.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1202,7 +1206,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_6.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_6.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -1212,7 +1216,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_6.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_6.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1383,7 +1387,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_7.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_7.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1393,7 +1397,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_7.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_7.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -1403,7 +1407,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_7.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_7.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1574,7 +1578,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_8.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_8.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1584,7 +1588,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_8.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_8.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -1594,7 +1598,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_8.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_8.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1765,7 +1769,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_9.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_9.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1775,7 +1779,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpcolour=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpcolour.open("GET","OBJPERC_colourmap_stage_9.xml",false);
+                    xmlhttpcolour.open("GET","./datasets/dataset_1/OBJPERC_colourmap_stage_9.xml",false);
                     xmlhttpcolour.send();
                     xmlDocColour=xmlhttpcolour.responseXML;
 
@@ -1785,7 +1789,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_9.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_9.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 

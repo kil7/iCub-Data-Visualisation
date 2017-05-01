@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styleicub.css" />
+    <link rel="stylesheet" type="text/css" href="./css/styleicub.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <script src="./js/toolkit.js" type="text/javascript"></script>
@@ -17,7 +17,7 @@
         <p>Data Visualisation</p>    
         <ul>
             <a href="https://github.com/kil7/iCub-Data-Visualisation">
-                <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+                <img id= "git" src="./images/GitHub-Mark-32px.png" alt="git">
             </a>
         </ul>
     </div>
@@ -35,6 +35,8 @@
     <div class="data">
 
         <h2>Gaze Maps Showing Size and Brightness of Detected Light</h2>
+        <p>The following series of charts visualises the mapping between the iCub's detection of light, and it's location in X/Y space over the learning timeframe. The intensity of the colour in the chart bubbles corresponds directly to brightness figure the iCub captures. The radius of each bubble represents the size of the light patch.</p>
+        <hr>  
         <canvas id="myChart" width="500" height="500"></canvas>    
         <script>
             if (window.XMLHttpRequest) {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -43,7 +45,7 @@
                 else {    // code for IE6, IE5
                     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttp.open("GET","OBJPERC_gazemap_stage_0.xml",false);
+                xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_0.xml",false);
                 xmlhttp.send();
                 xmlDoc=xmlhttp.responseXML;
 
@@ -53,7 +55,7 @@
                 else {    // code for IE6, IE5
                     xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_0.xml",false);
+                xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_0.xml",false);
                 xmlhttpbrightness.send();
                 xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -63,7 +65,7 @@
                 else {    // code for IE6, IE5
                     xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                xmlhttpmappings.open("GET","OBJPERC_mappings_stage_0.xml",false);
+                xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_0.xml",false);
                 xmlhttpmappings.send();
                 xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -230,7 +232,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_1.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_1.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -240,7 +242,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_1.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_1.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -250,7 +252,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_1.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_1.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -418,7 +420,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_2.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_2.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -428,7 +430,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_2.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_2.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -438,7 +440,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_2.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_2.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -606,7 +608,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_3.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_3.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -616,7 +618,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_3.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_3.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -626,7 +628,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_3.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_3.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -792,7 +794,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_4.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_4.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -802,7 +804,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_4.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_4.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -812,7 +814,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_4.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_4.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -977,7 +979,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_5.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_5.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -987,7 +989,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_5.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_5.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -997,7 +999,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_5.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_5.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1162,7 +1164,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_6.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_6.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1172,7 +1174,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_6.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_6.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -1182,7 +1184,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_6.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_6.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1347,7 +1349,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_7.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_7.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1357,7 +1359,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_7.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_7.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -1367,7 +1369,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_7.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_7.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1532,7 +1534,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_8.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_8.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1542,7 +1544,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_8.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_8.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -1552,7 +1554,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_8.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_8.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 
@@ -1718,7 +1720,7 @@
                     else {    // code for IE6, IE5
                         xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttp.open("GET","OBJPERC_gazemap_stage_9.xml",false);
+                    xmlhttp.open("GET","./datasets/dataset_1/OBJPERC_gazemap_stage_9.xml",false);
                     xmlhttp.send();
                     xmlDoc=xmlhttp.responseXML;
 
@@ -1728,7 +1730,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpbrightness=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpbrightness.open("GET","OBJPERC_brightnessmap_stage_9.xml",false);
+                    xmlhttpbrightness.open("GET","./datasets/dataset_1/OBJPERC_brightnessmap_stage_9.xml",false);
                     xmlhttpbrightness.send();
                     xmlDocBright=xmlhttpbrightness.responseXML;
 
@@ -1738,7 +1740,7 @@
                     else {    // code for IE6, IE5
                         xmlhttpmappings=new ActiveXObject("Microsoft.XMLHTTP");
                     }
-                    xmlhttpmappings.open("GET","OBJPERC_mappings_stage_9.xml",false);
+                    xmlhttpmappings.open("GET","./datasets/dataset_1/OBJPERC_mappings_stage_9.xml",false);
                     xmlhttpmappings.send();
                     xmlDocMap=xmlhttpmappings.responseXML;
 

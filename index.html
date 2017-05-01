@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styleicubhome.css" />
+    <link rel="stylesheet" type="text/css" href="./css/styleicubhome.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     <title>iCub Data Visualisation</title>
@@ -16,7 +16,7 @@
         <p>Data Visualisation</p>    
         <ul>
             <a href="https://github.com/kil7/iCub-Data-Visualisation">
-            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+            <img id= "git" src="./images/GitHub-Mark-32px.png" alt="git">
             </a>
         </ul>
     </div>
@@ -33,20 +33,13 @@
     </div>
     <div    class="data">
         <div class="gymimage">
-            <img id= "gym" src="icub.jpg" alt="A Little Robot" height="400" width="400"> 
+            <img id= "gym" src="./images/icub.jpg" alt="A Little Robot" height="400" width="400"> 
         </div>
         <hr>
-        <h2>About the iCub</h2>
+        <h2>About this Project</h2>
         <hr>
-        <p>The iCub is a humanoid robot, developed under the RobotCub project. It is a 53 degree-of-freedom robot, roughly 1m tall, and is equipped with visual, vestibular, auditory, haptic, proprioceptive, and torque sensors.</p>
-            <p> Each arm has 16 degrees of freedom, with 9 of these located in the hands.  The palms and fingertips of each arm contain 108 capacitative tactile sensors on a triangular array.  6-axial force/torque sensors are located in the upper arms.</p>
-
-               <p> The legs and torso contain 15 degrees of freedom (3 at the waist), and have 6-axial force/torque sensors located in the thigh.</p>
-
-               <p>The head contains 6 degrees of freedom split between the neck and eyes.  It contains 2 Dragonfly2 cameras (640*480, 15fps), 2 microphones and pinnae, gyros, digital compass and accelerometers. The head is also capable of displaying facial expressions with mechanised eyelids and LED displays for mouth and eyebrow positions.</p>
-
-               <p>Low level control is provided on board by a PC104 card with dual Intel Core 2 Duo 2.16MHz processors. Data transfer to/from the robot is via a Gbit/s Ethernet port.</p>
-
+        <p>The iCub is a humanoid robot used for research purposes at Aberystwyth University, namely to investigate the learning process in human infants. It makes use of an algorithm which increases acuity on certain parameters over time, such as resolution of a camera image, to effectively simulate the growth and learning of a child. The iCub robot has potential for some small amounts of movement: 15 degrees of freedom in the legs and torso, 16 degrees of freedom in the arms, and 6 degrees of freedom in the head split between the neck and eyes. This potential for movement allows the iCub to shift its "gaze space", focusing on objects originally outside its field of view.</p>
+        <p>The iCub gathers vast amounts of verbose data in the form of feature maps, brightness maps, saturation and hue maps, as well as sensorimotor data detailing the iCub's grip on objects. The principle goal of this project is to visualise this data in novel and interesting ways, attempting to highlight features in the dataset that were previously undiscovered.</p>
                <hr>
         <h2>Previous iCub Research</h2>
         <hr>
