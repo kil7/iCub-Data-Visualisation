@@ -16,7 +16,7 @@
         <p>Data Visualisation</p>    
         <ul>
             <a href="https://github.com/kil7/iCub-Data-Visualisation">
-            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+                <img id= "git" src="GitHub-Mark-32px.png" alt="git">
             </a>
         </ul>
     </div>
@@ -32,11 +32,14 @@
         </ul>
     </div>
     <div    class="data">
-    <h2>Motion Data for all 9 Months</h2>
-    <p>Click the chart legend to hide data for a specific month.</p>
-    <canvas id="myBarChartAll" width="500" height="500"></canvas> 
-    <script>
-        if (window.XMLHttpRequest)
+        <h1>Motion Maps</h1>
+        <p> Visualisation for the iCub's motion detection over the nine month learning period. With the only dimension needing to be visualised in this dataset being the intensity of the detected motion.</p>
+        <hr>
+        <h2>Motion Data for all 9 Months</h2>
+        <p>Click the chart legend to hide data for a specific month.</p>
+        <canvas id="myBarChartAll" width="500" height="500"></canvas> 
+        <script>
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp0=new XMLHttpRequest();
             }
@@ -65,7 +68,7 @@
               chartData0.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp1=new XMLHttpRequest();
             }
@@ -94,7 +97,7 @@
               chartData1.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp2=new XMLHttpRequest();
             }
@@ -123,7 +126,7 @@
               chartData2.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp3=new XMLHttpRequest();
             }
@@ -152,7 +155,7 @@
               chartData3.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp4=new XMLHttpRequest();
             }
@@ -181,7 +184,7 @@
               chartData4.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp5=new XMLHttpRequest();
             }
@@ -210,7 +213,7 @@
               chartData5.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp6=new XMLHttpRequest();
             }
@@ -239,7 +242,7 @@
               chartData6.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp7=new XMLHttpRequest();
             }
@@ -268,7 +271,7 @@
               chartData7.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp8=new XMLHttpRequest();
             }
@@ -297,7 +300,7 @@
               chartData8.push(parseFloat(e));
           });
 
-        if (window.XMLHttpRequest)
+            if (window.XMLHttpRequest)
                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                 xmlhttp9=new XMLHttpRequest();
             }
@@ -326,7 +329,7 @@
               chartData9.push(parseFloat(e));
           });
             var ctx = document.getElementById("myBarChartAll");
-        var myBarChartAll = new Chart(ctx, {
+            var myBarChartAll = new Chart(ctx, {
                 type: 'bar',
                 data: { 
                     labels: arrLab9,
@@ -334,62 +337,62 @@
                     {
                         label: 'Motion Map Month 0',
                         data: chartData0,
-                        backgroundColor:"#d83737",
-                        hoverBackgroundColor: "#d83737",
+                        backgroundColor:"#f5cbcb",
+                        hoverBackgroundColor: "#f5cbcb",
                     },
                     {
                         label: 'Motion Map Month 2',
                         data: chartData1,
-                        backgroundColor:"#db4848",
-                        hoverBackgroundColor: "#db4848",
-                    },
-                    {
-                        label: 'Motion Map Month 2',
-                        data: chartData2,
-                        backgroundColor:"#df5858",
-                        hoverBackgroundColor: "#df5858",
-                    },
-                    {
-                        label: 'Motion Map Month 3',
-                        data: chartData3,
-                        backgroundColor:"#e26969",
-                        hoverBackgroundColor: "#e26969",
-                    },
-                    {
-                        label: 'Motion Map Month 4',
-                        data: chartData4,
-                        backgroundColor:"#e57979",
-                        hoverBackgroundColor: "#e57979",
-                    },
-                    {
-                        label: 'Motion Map Month 5',
-                        data: chartData5,
-                        backgroundColor:"#e88989",
-                        hoverBackgroundColor: "#e88989",
-                    },
-                    {
-                        label: 'Motion Map Month 6',
-                        data: chartData6,
-                        backgroundColor:"#eb9a9a",
-                        hoverBackgroundColor: "#eb9a9a",
-                    },
-                    {
-                        label: 'Motion Map Month 7',
-                        data: chartData7,
-                        backgroundColor:"#efaaaa",
-                        hoverBackgroundColor: "#efaaaa",
-                    },
-                    {
-                        label: 'Motion Map Month 8',
-                        data: chartData8,
                         backgroundColor:"#f2bbbb",
                         hoverBackgroundColor: "#f2bbbb",
                     },
                     {
+                        label: 'Motion Map Month 2',
+                        data: chartData2,
+                        backgroundColor:"#efaaaa",
+                        hoverBackgroundColor: "#efaaaa",
+                    },
+                    {
+                        label: 'Motion Map Month 3',
+                        data: chartData3,
+                        backgroundColor:"#eb9a9a",
+                        hoverBackgroundColor: "#eb9a9a",
+                    },
+                    {
+                        label: 'Motion Map Month 4',
+                        data: chartData4,
+                        backgroundColor:"#e88989",
+                        hoverBackgroundColor: "#e88989",
+                    },
+                    {
+                        label: 'Motion Map Month 5',
+                        data: chartData5,
+                        backgroundColor:"#e57979",
+                        hoverBackgroundColor: "#e57979",
+                    },
+                    {
+                        label: 'Motion Map Month 6',
+                        data: chartData6,
+                        backgroundColor:"#e26969",
+                        hoverBackgroundColor: "#e26969",
+                    },
+                    {
+                        label: 'Motion Map Month 7',
+                        data: chartData7,
+                        backgroundColor:"#e26969",
+                        hoverBackgroundColor: "#e26969",
+                    },
+                    {
+                        label: 'Motion Map Month 8',
+                        data: chartData8,
+                        backgroundColor:"#db4848",
+                        hoverBackgroundColor: "#db4848",
+                    },
+                    {
                         label: 'Motion Map Month 9',
                         data: chartData9,
-                        backgroundColor:"#f5cbcb",
-                        hoverBackgroundColor: "#f5cbcb",
+                        backgroundColor:"#d83737",
+                        hoverBackgroundColor: "#d83737",
                     }]
                 },
                 options: {
@@ -399,9 +402,9 @@
                                 beginAtZero:true
                             },
                             scaleLabel: {
-                                    display: true,
-                                    labelString: 'Intensity of Motion'
-                                  }
+                                display: true,
+                                labelString: 'Intensity of Motion'
+                            }
                         }],
                         xAxes: [{
                             ticks: {
@@ -411,12 +414,17 @@
                     }
                 }
             });
-    </script>
-    <h2>Individual Charts Months 0 - 9</h2>
+        </script>
+        <h2>Individual Charts Months 0 - 9</h2>
+        <hr>
+        <div style="overflow-x:auto;">
+            <table>
+                <tr>
+                    <td>
 
-                <canvas id="myBarChart" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                        <canvas id="myBarChart" width="400" height="400"></canvas> 
+                        <script>
+                            if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -441,15 +449,15 @@
                             arrX.push(xcoord);
                             console.log(arrX);
 
-                            arrLab.push("Data Point " + i);
+                            arrLab.push(i);
                         }
                         var chartData = [];
                         arrX.forEach(function(e) {
                           chartData.push(parseFloat(e));
                       });
-                          console.log(chartData);
+                        console.log(chartData);
                         var ctx = document.getElementById("myBarChart");
-                    var myBarChart = new Chart(ctx, {
+                        var myBarChart = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -462,8 +470,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 0'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -476,10 +495,12 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart1" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+                <td>
+                    <canvas id="myBarChart1" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -510,9 +531,9 @@
                         arrX.forEach(function(e) {
                           chartData.push(parseFloat(e));
                       });
-                          console.log(chartData);
+                        console.log(chartData);
                         var ctx = document.getElementById("myBarChart1");
-                    var myBarChart1 = new Chart(ctx, {
+                        var myBarChart1 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -525,8 +546,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 1'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -539,10 +571,14 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart2" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myBarChart2" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -573,9 +609,9 @@
                         arrX.forEach(function(e) {
                           chartData.push(parseFloat(e));
                       });
-                          console.log(chartData);
+                        console.log(chartData);
                         var ctx = document.getElementById("myBarChart2");
-                    var myBarChart2 = new Chart(ctx, {
+                        var myBarChart2 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -588,8 +624,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 2'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -602,10 +649,12 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart3" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+                <td>
+                    <canvas id="myBarChart3" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -634,7 +683,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart3");
-                    var myBarChart3 = new Chart(ctx, {
+                        var myBarChart3 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -647,8 +696,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 3'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -661,10 +721,14 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart4" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myBarChart4" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -693,7 +757,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart4");
-                    var myBarChart4 = new Chart(ctx, {
+                        var myBarChart4 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -706,8 +770,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 4'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -720,10 +795,12 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart5" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+                <td>
+                    <canvas id="myBarChart5" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -752,7 +829,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart5");
-                    var myBarChart5 = new Chart(ctx, {
+                        var myBarChart5 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -765,8 +842,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 5'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -779,10 +867,14 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart6" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myBarChart6" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -811,7 +903,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart6");
-                    var myBarChart6 = new Chart(ctx, {
+                        var myBarChart6 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -824,8 +916,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 6'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -838,10 +941,12 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart7" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+                <td>
+                    <canvas id="myBarChart7" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -870,7 +975,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart7");
-                    var myBarChart7 = new Chart(ctx, {
+                        var myBarChart7 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -883,8 +988,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 7'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -897,10 +1013,14 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart8" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myBarChart8" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -929,7 +1049,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart8");
-                    var myBarChart8 = new Chart(ctx, {
+                        var myBarChart8 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -942,8 +1062,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 8'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -956,10 +1087,12 @@
                                 }
                             }
                         });
-                </script>
-                <canvas id="myBarChart9" width="500" height="500"></canvas> 
-                <script>
-                    if (window.XMLHttpRequest)
+                    </script>
+                </td>
+                <td>
+                    <canvas id="myBarChart9" width="400" height="400"></canvas> 
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -988,7 +1121,7 @@
                           chartData.push(parseFloat(e));
                       });
                         var ctx = document.getElementById("myBarChart9");
-                    var myBarChart9 = new Chart(ctx, {
+                        var myBarChart9 = new Chart(ctx, {
                             type: 'bar',
                             data: { 
                                 labels: arrLab,
@@ -1001,8 +1134,19 @@
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Motion Map Month 9'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Intensity'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1015,9 +1159,13 @@
                                 }
                             }
                         });
-                </script>
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </div>
 
-                </div>
+</div>
 
-            </body>
-            </html>
+</body>
+</html>

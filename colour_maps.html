@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="styleicub.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="./js/toolkit.js" type="text/javascript"></script>
     <title>iCub Data Visualisation</title>
     <meta charset="UTF-8" />
     
@@ -16,7 +17,7 @@
         <p>Data Visualisation</p>    
         <ul>
             <a href="https://github.com/kil7/iCub-Data-Visualisation">
-            <img id= "git" src="GitHub-Mark-32px.png" alt="git">
+                <img id= "git" src="GitHub-Mark-32px.png" alt="git">
             </a>
         </ul>
     </div>
@@ -32,12 +33,15 @@
         </ul>
     </div>
     <div    class="data">
-    <h2>Chart Showing All 9 Months</h2>
-    <p>Click the legend for the graph to hide that specific dataset, you will need to hide all datasets above the month you are intending to view as the later datasets will also contain data from earlier months.</p>
-    <p>Chart data starts at month three as no colour data was detected for prior months.</p>
-    <canvas id="myChartAll" width="500" height="500"></canvas>    
-    <script>
-        if (window.XMLHttpRequest)
+        <h1> Colour Maps </h1>
+        <p>Two-Dimensional representation of the HSV colour data the iCub detects, visualising the colour spaces detected over the nine month learning period. Only the hue and saturation values are used in these charts.</p>
+        <hr>
+        <h2>Chart Showing All 9 Months</h2>
+        <p>Click the legend for the graph to hide that specific dataset, you will need to hide all datasets above the month you are intending to view as the later datasets will also contain data from earlier months.</p>
+        <p>Chart data starts at month three as no colour data was detected for prior months.</p>
+        <canvas id="myChartAll" width="500" height="500"></canvas>    
+        <script>
+            if (window.XMLHttpRequest)
                    {    // code for IE7+, Firefox, Chrome, Opera, Safari
                     xmlhttp0=new XMLHttpRequest();
                 }
@@ -54,6 +58,8 @@
                 var arrRad0 = [];
                 var arrY0 = [];
                 var arrX0 = [];
+                var fullArrY0  = [];
+                var fullArrX0 = [];
                 for (i = 0; i < y0.length; i++) {
                     var firstRow0 = xmlDoc0.getElementsByTagName("Field")[i];
                     var radius0 = firstRow0.getAttribute("Radius");
@@ -62,10 +68,12 @@
                     xCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[0];
                     xcoord0 = xCoordsRow0.getAttribute("Value");
                     arrX0.push(xcoord0);
+                    fullArrX0.push(xcoord0);
 
                     yCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[1];
                     ycoord0 = yCoordsRow0.getAttribute("Value");
                     arrY0.push(ycoord0);
+                    fullArrY0.push(ycoord0);
                 }   
 
                 var chartData0 = [];
@@ -94,6 +102,8 @@
                     var arrRad1 = [];
                     var arrY1 = [];
                     var arrX1 = [];
+                    var fullArrY1  = [];
+                    var fullArrX1 = [];
                     for (j = 0; j <y1.length; j++) {
                         var firstRow1 = xmlDoc1.getElementsByTagName("Field")[j];
                         var radius1 = firstRow1.getAttribute("Radius");
@@ -101,11 +111,20 @@
 
                         xCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[0];
                         xcoord1 = xCoordsRow1.getAttribute("Value");
-                        arrX1.push(xcoord1);
+                        fullArrX1.push(xcoord1);
 
                         yCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[1];
                         ycoord1 = yCoordsRow1.getAttribute("Value");
-                        arrY1.push(ycoord1);
+                        fullArrY1.push(ycoord1);
+
+                        if (!isIncluded(fullArrX0, fullArrX1[j]) == true || !isIncluded(fullArrY0, fullArrY1[j]) == true) {
+                            arrX1.push(xcoord1);
+                            
+
+                        }
+                        if (!isIncluded(fullArrY0, fullArrY1[j]) == true || !isIncluded(fullArrX0, fullArrX1[j]) == true) {
+                            arrY1.push(ycoord1);
+                        }
                     }   
 
                     var chartData1 = [];
@@ -116,9 +135,9 @@
                         r: parseFloat(arrRad1[i]),
                     });
                   });
-                    console.log("incoming chart data");
-                    console.log(chartData0);
-                    console.log(chartData1);
+                    
+                    
+                    
 
                     if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -137,6 +156,8 @@
                         var arrRad2 = [];
                         var arrY2 = [];
                         var arrX2 = [];
+                        var fullArrY2  = [];
+                        var fullArrX2 = [];
                         for (j = 0; j <y2.length; j++) {
                             var firstRow2 = xmlDoc2.getElementsByTagName("Field")[j];
                             var radius2 = firstRow2.getAttribute("Radius");
@@ -144,11 +165,20 @@
 
                             xCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[0];
                             xcoord2 = xCoordsRow2.getAttribute("Value");
-                            arrX2.push(xcoord2);
+                            fullArrX2.push(xcoord2);
 
                             yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
                             ycoord2 = yCoordsRow2.getAttribute("Value");
-                            arrY2.push(ycoord2);
+                            fullArrY2.push(ycoord2);
+
+                            if (!isIncluded(fullArrX1, fullArrX2[j]) == true || !isIncluded(fullArrY1, fullArrY2[j]) == true) {
+                                arrX2.push(xcoord2);
+                                
+
+                            }
+                            if (!isIncluded(fullArrY1, fullArrY2[j]) == true || !isIncluded(fullArrX1, fullArrX2[j]) == true) {
+                                arrY2.push(ycoord2);
+                            }
                         }   
 
                         var chartData2 = [];
@@ -177,6 +207,8 @@
                             var arrRad3 = [];
                             var arrY3 = [];
                             var arrX3 = [];
+                            var fullArrY3  = [];
+                            var fullArrX3 = [];
                             for (j = 0; j <y3.length; j++) {
                                 var firstRow3 = xmlDoc3.getElementsByTagName("Field")[j];
                                 var radius3 = firstRow3.getAttribute("Radius");
@@ -184,11 +216,20 @@
 
                                 xCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[0];
                                 xcoord3 = xCoordsRow3.getAttribute("Value");
-                                arrX3.push(xcoord3);
+                                fullArrX3.push(xcoord3);
 
                                 yCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[1];
                                 ycoord3 = yCoordsRow3.getAttribute("Value");
-                                arrY3.push(ycoord3);
+                                fullArrY3.push(ycoord3);
+
+                                if (!isIncluded(fullArrX2, fullArrX3[j]) == true || !isIncluded(fullArrY2, fullArrY3[j]) == true) {
+                                    arrX3.push(xcoord3);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY2, fullArrY3[j]) == true || !isIncluded(fullArrX2, fullArrX3[j]) == true) {
+                                    arrY3.push(ycoord3);
+                                }
                             }   
 
                             var chartData3 = [];
@@ -200,7 +241,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp4=new XMLHttpRequest();
                             }
@@ -217,6 +258,8 @@
                             var arrRad4 = [];
                             var arrY4 = [];
                             var arrX4 = [];
+                            var fullArrY4  = [];
+                            var fullArrX4 = [];
                             for (j = 0; j <y4.length; j++) {
                                 var firstRow4 = xmlDoc4.getElementsByTagName("Field")[j];
                                 var radius4 = firstRow4.getAttribute("Radius");
@@ -224,11 +267,20 @@
 
                                 xCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[0];
                                 xcoord4 = xCoordsRow4.getAttribute("Value");
-                                arrX4.push(xcoord4);
+                                fullArrX4.push(xcoord4);
 
                                 yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
                                 ycoord4 = yCoordsRow4.getAttribute("Value");
-                                arrY4.push(ycoord4);
+                                fullArrY4.push(ycoord4);
+
+                                if (!isIncluded(fullArrX3, fullArrX4[j]) == true || !isIncluded(fullArrY3, fullArrY4[j]) == true) {
+                                    arrX4.push(xcoord4);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY3, fullArrY4[j]) == true || !isIncluded(fullArrX3, fullArrX4[j]) == true) {
+                                    arrY4.push(ycoord4);
+                                }
                             }   
 
                             var chartData4 = [];
@@ -240,7 +292,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp5=new XMLHttpRequest();
                             }
@@ -257,6 +309,8 @@
                             var arrRad5 = [];
                             var arrY5 = [];
                             var arrX5 = [];
+                            var fullArrY5  = [];
+                            var fullArrX5 = [];
                             for (j = 0; j <y5.length; j++) {
                                 var firstRow5 = xmlDoc5.getElementsByTagName("Field")[j];
                                 var radius5 = firstRow5.getAttribute("Radius");
@@ -264,11 +318,20 @@
 
                                 xCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[0];
                                 xcoord5 = xCoordsRow5.getAttribute("Value");
-                                arrX5.push(xcoord5);
+                                fullArrX5.push(xcoord5);
 
                                 yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
                                 ycoord5 = yCoordsRow5.getAttribute("Value");
-                                arrY5.push(ycoord5);
+                                fullArrY5.push(ycoord5);
+
+                                if (!isIncluded(fullArrX4, fullArrX5[j]) == true || !isIncluded(fullArrY4, fullArrY5[j]) == true) {
+                                    arrX5.push(xcoord5);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY4, fullArrY5[j]) == true || !isIncluded(fullArrX4, fullArrX5[j]) == true) {
+                                    arrY5.push(ycoord5);
+                                }
                             }   
 
                             var chartData5 = [];
@@ -280,7 +343,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp6=new XMLHttpRequest();
                             }
@@ -297,6 +360,8 @@
                             var arrRad6 = [];
                             var arrY6 = [];
                             var arrX6 = [];
+                            var fullArrY6  = [];
+                            var fullArrX6 = [];
                             for (j = 0; j <y6.length; j++) {
                                 var firstRow6 = xmlDoc6.getElementsByTagName("Field")[j];
                                 var radius6 = firstRow6.getAttribute("Radius");
@@ -304,11 +369,20 @@
 
                                 xCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[0];
                                 xcoord6 = xCoordsRow6.getAttribute("Value");
-                                arrX6.push(xcoord6);
+                                fullArrX6.push(xcoord6);
 
                                 yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
                                 ycoord6 = yCoordsRow6.getAttribute("Value");
-                                arrY6.push(ycoord6);
+                                fullArrY6.push(ycoord6);
+
+                                if (!isIncluded(fullArrX5, fullArrX6[j]) == true || !isIncluded(fullArrY5, fullArrY6[j]) == true) {
+                                    arrX6.push(xcoord6);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY5, fullArrY6[j]) == true || !isIncluded(fullArrX5, fullArrX6[j]) == true) {
+                                    arrY6.push(ycoord6);
+                                }
                             }   
 
                             var chartData6 = [];
@@ -320,7 +394,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp7=new XMLHttpRequest();
                             }
@@ -337,6 +411,8 @@
                             var arrRad7 = [];
                             var arrY7 = [];
                             var arrX7 = [];
+                            var fullArrY7  = [];
+                            var fullArrX7 = [];
                             for (j = 0; j <y7.length; j++) {
                                 var firstRow7 = xmlDoc7.getElementsByTagName("Field")[j];
                                 var radius7 = firstRow7.getAttribute("Radius");
@@ -344,11 +420,20 @@
 
                                 xCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[0];
                                 xcoord7 = xCoordsRow7.getAttribute("Value");
-                                arrX7.push(xcoord7);
+                                fullArrX7.push(xcoord7);
 
                                 yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
                                 ycoord7 = yCoordsRow7.getAttribute("Value");
-                                arrY7.push(ycoord7);
+                                fullArrY7.push(ycoord7);
+
+                                if (!isIncluded(fullArrX6, fullArrX7[j]) == true || !isIncluded(fullArrY6, fullArrY7[j]) == true) {
+                                    arrX7.push(xcoord7);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY6, fullArrY7[j]) == true || !isIncluded(fullArrX6, fullArrX7[j]) == true) {
+                                    arrY7.push(ycoord7);
+                                }
                             }   
 
                             var chartData7 = [];
@@ -360,7 +445,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp8=new XMLHttpRequest();
                             }
@@ -377,6 +462,8 @@
                             var arrRad8 = [];
                             var arrY8 = [];
                             var arrX8 = [];
+                            var fullArrY8  = [];
+                            var fullArrX8 = [];
                             for (j = 0; j <y8.length; j++) {
                                 var firstRow8 = xmlDoc8.getElementsByTagName("Field")[j];
                                 var radius8 = firstRow8.getAttribute("Radius");
@@ -384,11 +471,20 @@
 
                                 xCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[0];
                                 xcoord8 = xCoordsRow8.getAttribute("Value");
-                                arrX8.push(xcoord8);
+                                fullArrX8.push(xcoord8);
 
                                 yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
                                 ycoord8 = yCoordsRow8.getAttribute("Value");
-                                arrY8.push(ycoord8);
+                                fullArrY8.push(ycoord8);
+
+                                if (!isIncluded(fullArrX7, fullArrX8[j]) == true || !isIncluded(fullArrY7, fullArrY8[j]) == true) {
+                                    arrX8.push(xcoord8);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY7, fullArrY8[j]) == true || !isIncluded(fullArrX7, fullArrX8[j]) == true) {
+                                    arrY8.push(ycoord8);
+                                }
                             }   
 
                             var chartData8 = [];
@@ -400,7 +496,7 @@
                             });
                           });
 
-                        if (window.XMLHttpRequest)
+                            if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp9=new XMLHttpRequest();
                             }
@@ -417,6 +513,8 @@
                             var arrRad9 = [];
                             var arrY9 = [];
                             var arrX9 = [];
+                            var fullArrY9 = [];
+                            var fullArrX9 = [];
                             for (j = 0; j <y9.length; j++) {
                                 var firstRow9 = xmlDoc9.getElementsByTagName("Field")[j];
                                 var radius9 = firstRow9.getAttribute("Radius");
@@ -424,12 +522,21 @@
 
                                 xCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[0];
                                 xcoord9 = xCoordsRow9.getAttribute("Value");
-                                arrX9.push(xcoord9);
+                                fullArrX9.push(xcoord9);
 
                                 yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
                                 ycoord9 = yCoordsRow9.getAttribute("Value");
-                                arrY9.push(ycoord9);
-                            }   
+                                fullArrY9.push(ycoord9);
+
+                                if (!isIncluded(fullArrX8, fullArrX9[j]) == true || !isIncluded(fullArrY8, fullArrY9[j]) == true) {
+                                    arrX9.push(xcoord9);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY8, fullArrY9[j]) == true || !isIncluded(fullArrX8, fullArrX9[j]) == true) {
+                                    arrY9.push(ycoord9);
+                                }
+                            } 
 
                             var chartData9 = [];
                             arrX9.forEach(function(e, i) {
@@ -441,85 +548,103 @@
                           });
 
 
-                var ctx = document.getElementById("myChartAll");
-                var myChartAll = new Chart(ctx, {
-                    type: 'bubble',
-                    data: { 
-                        labels: ["Colour Map Month 0", "Colour Map Month 1", "Colour Map Month 2", "Colour Map Month 3", "Colour Map Month 4", "Colour Map Month 5", "Colour Map Month 6", "Colour Map Month 7", "Colour Map Month 8", "Colour Map Month 9"],
-                        datasets: [
-                        {
-                            label: 'Colour Map Month 3',
-                            data: chartData3,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        },
-                        {
-                            label: 'Colour Map Month 4',
-                            data: chartData4,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
+                            var ctx = document.getElementById("myChartAll");
+                            var myChartAll = new Chart(ctx, {
+                                type: 'bubble',
+                                data: { 
+                                    labels: ["Colour Map Month 0", "Colour Map Month 1", "Colour Map Month 2", "Colour Map Month 3", "Colour Map Month 4", "Colour Map Month 5", "Colour Map Month 6", "Colour Map Month 7", "Colour Map Month 8", "Colour Map Month 9"],
+                                    datasets: [
+                                    {
+                                        label: 'Colour Map Month 3',
+                                        data: chartData3,
+                                        backgroundColor:"rgba(65, 244, 116, 0.4)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.4)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    },
+                                    {
+                                        label: 'Colour Map Month 4',
+                                        data: chartData4,
+                                        backgroundColor:"rgba(65, 244, 116, 0.5)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.5)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
 
-                        },
-                        {
-                            label: 'Colour Map Month 5',
-                            data: chartData5,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        },
-                        {
-                            label: 'Colour Map Month 6',
-                            data: chartData6,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        },
-                        {
-                            label: 'Colour Map Month 7',
-                            data: chartData7,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        },
-                        {
-                            label: 'Colour Map Month 8',
-                            data: chartData8,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        },
-                        {
-                            label: 'Colour Map Month 9',
-                            data: chartData9,
-                            backgroundColor:"#41f474",
-                            hoverBackgroundColor: "#41f474",
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
+                                    },
+                                    {
+                                        label: 'Colour Map Month 5',
+                                        data: chartData5,
+                                        backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    },
+                                    {
+                                        label: 'Colour Map Month 6',
+                                        data: chartData6,
+                                        backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    },
+                                    {
+                                        label: 'Colour Map Month 7',
+                                        data: chartData7,
+                                        backgroundColor:"rgba(65, 244, 116, 0.7)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.7)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    },
+                                    {
+                                        label: 'Colour Map Month 8',
+                                        data: chartData8,
+                                        backgroundColor:"rgba(65, 244, 116, 0.8)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.8)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    },
+                                    {
+                                        label: 'Colour Map Month 9',
+                                        data: chartData9,
+                                        backgroundColor:"rgba(65, 244, 116, 0.9)",
+                                        hoverBackgroundColor: "rgba(65, 244, 116, 0.9)",
+                                        borderWidth: 1.5,
+                                        borderColor: "rgba(65, 244, 116, 0.8)",
+                                    }]
                                 },
-                                scaleLabel: {
-                                        display: true,
-                                        labelString: 'Saturation'
-                                      }
-                            }],
-                            xAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                },
-                                scaleLabel: {
-                                        display: true,
-                                        labelString: 'Hue'
-                                      }
-                            }]
-                        }
-                    }
-                });
-            </script> 
-        <h2>Chart Data Months 0 - 9</h2>
-        <div class = "graph">
-            <canvas id="myColourChart0" width="500" height="500"></canvas>    
-            <script>
-                if (window.XMLHttpRequest)
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero:true
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Saturation'
+                                            }
+                                        }],
+                                        xAxes: [{
+                                            ticks: {
+                                                beginAtZero:true
+                                            },
+                                            scaleLabel: {
+                                                display: true,
+                                                labelString: 'Hue'
+                                            }
+                                        }]
+                                    }
+                                }
+                            });
+                        </script> 
+                        <h2>Chart Data Months 0 - 9</h2>
+                        <hr>
+                        <div style="overflow-x:auto;">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <canvas id="myColourChart0" width="400" height="400"></canvas>    
+                                        <script>
+                                            if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -539,24 +664,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad)
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -567,7 +692,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart0");
                         var myColourChart0 = new Chart(ctx, {
                             type: 'bubble',
@@ -577,18 +702,36 @@
                                 {
                                     label: 'Colour Map Month 0',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 0'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -597,10 +740,11 @@
                             }
                         });
                     </script> 
-                </div>
-                <canvas id="myColourChart1" width="500" height="500"></canvas>    
-            <script>
-                if (window.XMLHttpRequest)
+                </td>
+                <td>
+                    <canvas id="myColourChart1" width="400" height="400"></canvas>    
+                    <script>
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -620,24 +764,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -648,7 +792,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart1");
                         var myColourChart1 = new Chart(ctx, {
                             type: 'bubble',
@@ -658,18 +802,36 @@
                                 {
                                     label: 'Colour Map Month 1',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 1'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -678,9 +840,13 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart2" width="500" height="500"></canvas>    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myColourChart2" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -700,24 +866,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -728,7 +894,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart2");
                         var myColourChart2 = new Chart(ctx, {
                             type: 'bubble',
@@ -738,18 +904,36 @@
                                 {
                                     label: 'Colour Map Month 2',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 2'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -758,9 +942,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart3" width="500" height="500"></canvas>    
+                </td>
+                <td>
+                    <canvas id="myColourChart3" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -780,24 +966,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -808,7 +994,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart3");
                         var myColourChart3 = new Chart(ctx, {
                             type: 'bubble',
@@ -818,18 +1004,36 @@
                                 {
                                     label: 'Colour Map Month 3',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 3'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -838,9 +1042,13 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart4" width="500" height="500"></canvas>    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myColourChart4" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -860,24 +1068,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -888,7 +1096,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart4");
                         var myColourChart4 = new Chart(ctx, {
                             type: 'bubble',
@@ -898,18 +1106,36 @@
                                 {
                                     label: 'Colour Map Month 4',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 4'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -918,9 +1144,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart5" width="500" height="500"></canvas>    
+                </td>
+                <td>
+                    <canvas id="myColourChart5" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -940,24 +1168,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -968,7 +1196,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart5");
                         var myColourChart5 = new Chart(ctx, {
                             type: 'bubble',
@@ -978,18 +1206,36 @@
                                 {
                                     label: 'Colour Map Month 5',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 5'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -998,9 +1244,13 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart6" width="500" height="500"></canvas>    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myColourChart6" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -1020,24 +1270,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1048,7 +1298,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart6");
                         var myColourChart6 = new Chart(ctx, {
                             type: 'bubble',
@@ -1058,18 +1308,36 @@
                                 {
                                     label: 'Colour Map Month 6',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 6'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1078,9 +1346,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart7" width="500" height="500"></canvas>    
+                </td>
+                <td>
+                    <canvas id="myColourChart7" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -1100,24 +1370,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1128,7 +1398,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart7");
                         var myColourChart7 = new Chart(ctx, {
                             type: 'bubble',
@@ -1138,18 +1408,36 @@
                                 {
                                     label: 'Colour Map Month 7',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 7'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1158,9 +1446,13 @@
                             }
                         });
                     </script>
-                    <canvas id="myColourChart8" width="500" height="500"></canvas>    
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <canvas id="myColourChart8" width="400" height="400"></canvas>    
                     <script>
-                if (window.XMLHttpRequest)
+                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -1180,24 +1472,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1208,7 +1500,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart8");
                         var myColourChart8 = new Chart(ctx, {
                             type: 'bubble',
@@ -1218,29 +1510,48 @@
                                 {
                                     label: 'Colour Map Month 8',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 8'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }]
                                 }
-                            }
-                        });
-                    </script>
-                    <canvas id="myColourChart9" width="500" height="500"></canvas>    
-                    <script>
-                if (window.XMLHttpRequest)
+                            }                        });
+                        </script>
+                    </td>
+                    <td>
+                        <canvas id="myColourChart9" width="400" height="400"></canvas>    
+                        <script>
+                            if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -1260,24 +1571,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
                             xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
                             yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1288,7 +1599,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myColourChart9");
                         var myColourChart9 = new Chart(ctx, {
                             type: 'bubble',
@@ -1298,18 +1609,36 @@
                                 {
                                     label: 'Colour Map Month 9',
                                     data: chartData,
-                                    backgroundColor:"#41f474",
-                                    hoverBackgroundColor: "#41f474",
+                                    backgroundColor:"rgba(65, 244, 116, 0.6)",
+                                    hoverBackgroundColor: "rgba(65, 244, 116, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(65, 244, 116, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Colour Map Month 9'
+                                },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Saturation'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Hue'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1317,9 +1646,13 @@
                                 }
                             }
                         });
-                    </script>   
+                    </script> 
+                </td>
+            </tr>
+        </table>
+    </div>  
 
-                </div>
+</div>
 
-            </body>
-            </html>
+</body>
+</html>

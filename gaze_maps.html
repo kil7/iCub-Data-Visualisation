@@ -163,28 +163,28 @@
                             xcoord2 = xCoordsRow2.getAttribute("Value");
                             fullArrX2.push(xcoord2);
                             if (!isIncluded(fullArrX1, xcoord2) == true) {
-                             arrX2.push(xcoord2);                    
-                         }
+                               arrX2.push(xcoord2);                    
+                           }
 
 
-                         yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
-                         ycoord2 = yCoordsRow2.getAttribute("Value");
-                         fullArrY2.push(ycoord2);
-                         if (!isIncluded(fullArrY1, ycoord2) == true) {
-                             arrY2.push(xcoord2);
-                         }
-                     }   
+                           yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
+                           ycoord2 = yCoordsRow2.getAttribute("Value");
+                           fullArrY2.push(ycoord2);
+                           if (!isIncluded(fullArrY1, ycoord2) == true) {
+                               arrY2.push(xcoord2);
+                           }
+                       }   
 
-                     var chartData2 = [];
-                     arrX2.forEach(function(e, i) {
-                      chartData2.push({
-                        x: parseFloat(e),
-                        y: parseFloat(arrY2[i]),
-                        r: parseFloat(arrRad2[i]),
-                    });
-                  });
+                       var chartData2 = [];
+                       arrX2.forEach(function(e, i) {
+                          chartData2.push({
+                            x: parseFloat(e),
+                            y: parseFloat(arrY2[i]),
+                            r: parseFloat(arrRad2[i]),
+                        });
+                      });
 
-                     if (window.XMLHttpRequest)
+                       if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp3=new XMLHttpRequest();
                             }
@@ -260,27 +260,27 @@
                                 xcoord4 = xCoordsRow4.getAttribute("Value");
                                 fullArrX4.push(xcoord4);
                                 if (!isIncluded(fullArrX3, xcoord4) == true) {
-                                 arrX4.push(xcoord4);                    
-                             }
+                                   arrX4.push(xcoord4);                    
+                               }
 
-                             yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
-                             ycoord4 = yCoordsRow4.getAttribute("Value");
-                             fullArrY4.push(ycoord4);
-                             if (!isIncluded(fullArrY3, ycoord4) == true) {
-                                 arrY4.push(ycoord4);
-                             }
-                         }   
+                               yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
+                               ycoord4 = yCoordsRow4.getAttribute("Value");
+                               fullArrY4.push(ycoord4);
+                               if (!isIncluded(fullArrY3, ycoord4) == true) {
+                                   arrY4.push(ycoord4);
+                               }
+                           }   
 
-                         var chartData4 = [];
-                         arrX4.forEach(function(e, i) {
-                          chartData4.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY4[i]),
-                            r: parseFloat(arrRad4[i]),
-                        });
-                      });
+                           var chartData4 = [];
+                           arrX4.forEach(function(e, i) {
+                              chartData4.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY4[i]),
+                                r: parseFloat(arrRad4[i]),
+                            });
+                          });
 
-                         if (window.XMLHttpRequest)
+                           if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp5=new XMLHttpRequest();
                             }
@@ -308,27 +308,27 @@
                                 xcoord5 = xCoordsRow5.getAttribute("Value");
                                 fullArrX5.push(xcoord5);
                                 if (!isIncluded(fullArrX4, xcoord5) == true) {
-                                 arrX5.push(xcoord5);                    
-                             }
+                                   arrX5.push(xcoord5);                    
+                               }
 
-                             yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
-                             ycoord5 = yCoordsRow5.getAttribute("Value");
-                             fullArrY5.push(ycoord5);
-                             if (!isIncluded(fullArrY4, ycoord5) == true) {
-                                 arrY5.push(ycoord5);
-                             }                           
-                         }   
+                               yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
+                               ycoord5 = yCoordsRow5.getAttribute("Value");
+                               fullArrY5.push(ycoord5);
+                               if (!isIncluded(fullArrY4, ycoord5) == true) {
+                                   arrY5.push(ycoord5);
+                               }                           
+                           }   
 
-                         var chartData5 = [];
-                         arrX5.forEach(function(e, i) {
-                          chartData5.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY5[i]),
-                            r: parseFloat(arrRad5[i]),
-                        });
-                      });
+                           var chartData5 = [];
+                           arrX5.forEach(function(e, i) {
+                              chartData5.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY5[i]),
+                                r: parseFloat(arrRad5[i]),
+                            });
+                          });
 
-                         if (window.XMLHttpRequest)
+                           if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp6=new XMLHttpRequest();
                             }
@@ -356,27 +356,27 @@
                                 xcoord6 = xCoordsRow6.getAttribute("Value");
                                 fullArrX6.push(xcoord6);
                                 if (!isIncluded(fullArrX5, xcoord6) == true) {
-                                 arrX6.push(xcoord6);                    
-                             }
+                                   arrX6.push(xcoord6);                    
+                               }
 
-                             yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
-                             ycoord6 = yCoordsRow6.getAttribute("Value");
-                             fullArrY6.push(ycoord6);
-                             if (!isIncluded(fullArrY5, ycoord6) == true) {
-                                 arrY6.push(ycoord6);
-                             }
-                         }   
+                               yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
+                               ycoord6 = yCoordsRow6.getAttribute("Value");
+                               fullArrY6.push(ycoord6);
+                               if (!isIncluded(fullArrY5, ycoord6) == true) {
+                                   arrY6.push(ycoord6);
+                               }
+                           }   
 
-                         var chartData6 = [];
-                         arrX6.forEach(function(e, i) {
-                          chartData6.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY6[i]),
-                            r: parseFloat(arrRad6[i]),
-                        });
-                      });
+                           var chartData6 = [];
+                           arrX6.forEach(function(e, i) {
+                              chartData6.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY6[i]),
+                                r: parseFloat(arrRad6[i]),
+                            });
+                          });
 
-                         if (window.XMLHttpRequest)
+                           if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp7=new XMLHttpRequest();
                             }
@@ -404,27 +404,27 @@
                                 xcoord7 = xCoordsRow7.getAttribute("Value");
                                 fullArrX7.push(xcoord7);
                                 if (!isIncluded(fullArrX6, xcoord7) == true) {
-                                 arrX7.push(xcoord7);                    
-                             }
+                                   arrX7.push(xcoord7);                    
+                               }
 
-                             yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
-                             ycoord7 = yCoordsRow7.getAttribute("Value");
-                             fullArrY7.push(ycoord7);
-                             if (!isIncluded(fullArrY6, ycoord7) == true) {
-                                 arrY7.push(ycoord7);
-                             }
-                         }   
+                               yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
+                               ycoord7 = yCoordsRow7.getAttribute("Value");
+                               fullArrY7.push(ycoord7);
+                               if (!isIncluded(fullArrY6, ycoord7) == true) {
+                                   arrY7.push(ycoord7);
+                               }
+                           }   
 
-                         var chartData7 = [];
-                         arrX7.forEach(function(e, i) {
-                          chartData7.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY7[i]),
-                            r: parseFloat(arrRad7[i]),
-                        });
-                      });
+                           var chartData7 = [];
+                           arrX7.forEach(function(e, i) {
+                              chartData7.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY7[i]),
+                                r: parseFloat(arrRad7[i]),
+                            });
+                          });
 
-                         if (window.XMLHttpRequest)
+                           if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp8=new XMLHttpRequest();
                             }
@@ -452,27 +452,27 @@
                                 xcoord8 = xCoordsRow8.getAttribute("Value");
                                 fullArrX8.push(xcoord8);
                                 if (!isIncluded(fullArrX7, xcoord8) == true) {
-                                 arrX8.push(xcoord8);                    
-                             }
+                                   arrX8.push(xcoord8);                    
+                               }
 
-                             yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
-                             ycoord8 = yCoordsRow8.getAttribute("Value");
-                             fullArrY8.push(ycoord8);
-                             if (!isIncluded(fullArrY7, ycoord8) == true) {
-                                 arrY8.push(ycoord8);
-                             }
-                         }   
+                               yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
+                               ycoord8 = yCoordsRow8.getAttribute("Value");
+                               fullArrY8.push(ycoord8);
+                               if (!isIncluded(fullArrY7, ycoord8) == true) {
+                                   arrY8.push(ycoord8);
+                               }
+                           }   
 
-                         var chartData8 = [];
-                         arrX8.forEach(function(e, i) {
-                          chartData8.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY8[i]),
-                            r: parseFloat(arrRad8[i]),
-                        });
-                      });
+                           var chartData8 = [];
+                           arrX8.forEach(function(e, i) {
+                              chartData8.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY8[i]),
+                                r: parseFloat(arrRad8[i]),
+                            });
+                          });
 
-                         if (window.XMLHttpRequest)
+                           if (window.XMLHttpRequest)
                                {    // code for IE7+, Firefox, Chrome, Opera, Safari
                                 xmlhttp9=new XMLHttpRequest();
                             }
@@ -500,29 +500,29 @@
                                 xcoord9 = xCoordsRow9.getAttribute("Value");
                                 fullArrX9.push(xcoord9);
                                 if (!isIncluded(fullArrX8, xcoord9) == true) {
-                                 arrX9.push(xcoord9);                    
-                             }
+                                   arrX9.push(xcoord9);                    
+                               }
 
-                             yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
-                             ycoord9 = yCoordsRow9.getAttribute("Value");
-                             fullArrY9.push(ycoord9);
-                             if (!isIncluded(fullArrY8, ycoord9) == true) {
-                                 arrY9.push(ycoord9);
-                             }
-                         }   
+                               yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
+                               ycoord9 = yCoordsRow9.getAttribute("Value");
+                               fullArrY9.push(ycoord9);
+                               if (!isIncluded(fullArrY8, ycoord9) == true) {
+                                   arrY9.push(ycoord9);
+                               }
+                           }   
 
-                         var chartData9 = [];
-                         arrX9.forEach(function(e, i) {
-                          chartData9.push({
-                            x: parseFloat(e),
-                            y: parseFloat(arrY9[i]),
-                            r: parseFloat(arrRad9[i]),
-                        });
-                      });
+                           var chartData9 = [];
+                           arrX9.forEach(function(e, i) {
+                              chartData9.push({
+                                x: parseFloat(e),
+                                y: parseFloat(arrY9[i]),
+                                r: parseFloat(arrRad9[i]),
+                            });
+                          });
 
 
-                         var ctx = document.getElementById("myChartAll");
-                         var myChartAll = new Chart(ctx, {
+                           var ctx = document.getElementById("myChartAll");
+                           var myChartAll = new Chart(ctx, {
                             type: 'bubble',
                             data: { 
                                 labels: ["Gaze Map Month 0", "Gaze Map Month 1", "Gaze Map Month 2", "Gaze Map Month 3", "Gaze Map Month 4", "Gaze Map Month 5", "Gaze Map Month 6", "Gaze Map Month 7", "Gaze Map Month 8", "Gaze Map Month 9"],
@@ -639,12 +639,12 @@
                     <h2>Individual Charts Months 0 - 9</h2>
                     <hr>
                     <div style="overflow-x:auto;">
-                    <table>
-                    <tr>
-                    <td>
-                    <canvas id="myChart" width="400" height="400"></canvas>    
-                    <script>
-                        if (window.XMLHttpRequest)
+                        <table>
+                            <tr>
+                                <td>
+                                    <canvas id="myChart" width="400" height="400"></canvas>    
+                                    <script>
+                                        if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
                             xmlhttp=new XMLHttpRequest();
                         }
@@ -712,9 +712,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 0'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 0'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -739,8 +739,8 @@
                             }
                         });
                     </script> 
-                    </td>
-                    <td>
+                </td>
+                <td>
                     <canvas id="myChart1" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -803,9 +803,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 1'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 1'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -830,10 +830,10 @@
                             }
                         });
                     </script>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <canvas id="myChart2" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -906,9 +906,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 2'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 2'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -933,8 +933,8 @@
                             }
                         });
                     </script>
-                    </td>
-                    <td>
+                </td>
+                <td>
                     <canvas id="myChart3" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1006,9 +1006,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 3'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 3'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1033,10 +1033,10 @@
                             }
                         });
                     </script>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <canvas id="myChart4" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1109,9 +1109,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 4'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 4'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1136,8 +1136,8 @@
                             }
                         });
                     </script>
-                    </td>
-                    <td>
+                </td>
+                <td>
                     <canvas id="myChart5" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1210,9 +1210,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 5'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 5'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1237,10 +1237,10 @@
                             }
                         });
                     </script>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <canvas id="myChart6" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1313,9 +1313,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 6'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 6'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1340,8 +1340,8 @@
                             }
                         });
                     </script>
-                    </td>
-                    <td>
+                </td>
+                <td>
                     <canvas id="myChart7" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1414,9 +1414,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 7'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 7'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1441,10 +1441,10 @@
                             }
                         });
                     </script>
-                    </td>
-                    </tr>
-                    <tr>
-                    <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <canvas id="myChart8" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1517,9 +1517,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 8'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 8'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1544,8 +1544,8 @@
                             }
                         });
                     </script>
-                    </td>
-                    <td>
+                </td>
+                <td>
                     <canvas id="myChart9" width="400" height="400"></canvas>    
                     <script>
                         if (window.XMLHttpRequest)
@@ -1618,9 +1618,9 @@
                                     display: false
                                 },
                                 title: {
-                                            display: true,
-                                            text: 'Gaze Map Month 9'
-                                        },
+                                    display: true,
+                                    text: 'Gaze Map Month 9'
+                                },
                                 scales: {
                                     yAxes: [{
                                         scaleLabel: {
@@ -1645,11 +1645,11 @@
                             }
                         });
                     </script>
-                    </td>
-                    </tr>
-                    </table>
-                    </div>               
-                </div>
+                </td>
+            </tr>
+        </table>
+    </div>               
+</div>
 
-            </body>
-            </html>
+</body>
+</html>
