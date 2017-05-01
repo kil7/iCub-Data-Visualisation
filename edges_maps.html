@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="styleicub.css" />
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,300,600,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+    <script src="./js/toolkit.js" type="text/javascript"></script>
     <title>iCub Data Visualisation</title>
     <meta charset="UTF-8" />
     
@@ -32,6 +33,9 @@
         </ul>
     </div>
     <div    class="data">
+    <h1>Edge Maps</h1>
+    <p>Charts created from edge map data only. Each data point represents the size of a theoretical "edge rectangle", with the x axis being the horizontal dimension, and the y axis the vertical.</p>
+    <hr>
     <h2>Chart Showing All 9 Months</h2>
     <p>Click the legend for the graph to hide that specific dataset, you will need to hide all datasets above the month you are intending to view as the later datasets will also contain data from earlier months.</p>
     <p>Chart data starts at month three as no edge data was detected for prior months.</p>
@@ -54,17 +58,21 @@
                 var arrRad0 = [];
                 var arrY0 = [];
                 var arrX0 = [];
+                var fullArrX0 = [];
+                var fullArrY0 = [];
                 for (i = 0; i < y0.length; i++) {
                     var firstRow0 = xmlDoc0.getElementsByTagName("Field")[i];
                     var radius0 = firstRow0.getAttribute("Radius");
                     arrRad0.push(radius0);
 
-                    xCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[0];
+                    xCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[1];
                     xcoord0 = xCoordsRow0.getAttribute("Value");
+                    fullArrx0.push(xcoord0);
                     arrX0.push(xcoord0);
 
-                    yCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[1];
+                    yCoordsRow0 = firstRow0.getElementsByTagName("Dimension")[2];
                     ycoord0 = yCoordsRow0.getAttribute("Value");
+                    fullArrY0.push(ycoord0);
                     arrY0.push(ycoord0);
                 }   
 
@@ -94,19 +102,29 @@
                     var arrRad1 = [];
                     var arrY1 = [];
                     var arrX1 = [];
+                    var fullArrX1 = [];
+                    var fullArrY1 = [];
                     for (j = 0; j <y1.length; j++) {
                         var firstRow1 = xmlDoc1.getElementsByTagName("Field")[j];
                         var radius1 = firstRow1.getAttribute("Radius");
                         arrRad1.push(radius1);
 
-                        xCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[0];
+                        xCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[1];
                         xcoord1 = xCoordsRow1.getAttribute("Value");
-                        arrX1.push(xcoord1);
+                        fullArrX1.push(xcoord1);
 
-                        yCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[1];
+                        yCoordsRow1 = firstRow1.getElementsByTagName("Dimension")[2];
                         ycoord1 = yCoordsRow1.getAttribute("Value");
-                        arrY1.push(ycoord1);
-                    }   
+                        fullArrY1.push(ycoord1);
+                        if (!isIncluded(fullArrX0, fullArrX1[j]) == true || !isIncluded(fullArrY0, fullArrY1[j]) == true) {
+                            arrX1.push(xcoord1);
+                            
+
+                        }
+                        if (!isIncluded(fullArrY0, fullArrY1[j]) == true || !isIncluded(fullArrX0, fullArrX1[j]) == true) {
+                            arrY1.push(ycoord1);
+                        }
+                    }  
 
                     var chartData1 = [];
                     arrX1.forEach(function(e, i) {
@@ -116,9 +134,9 @@
                         r: parseFloat(arrRad1[i]),
                     });
                   });
-                    console.log("incoming chart data");
-                    console.log(chartData0);
-                    console.log(chartData1);
+                    
+                    
+                    
 
                     if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -137,18 +155,28 @@
                         var arrRad2 = [];
                         var arrY2 = [];
                         var arrX2 = [];
+                        var fullArrX2 = [];
+                        var fullArrY2 = [];
                         for (j = 0; j <y2.length; j++) {
                             var firstRow2 = xmlDoc2.getElementsByTagName("Field")[j];
                             var radius2 = firstRow2.getAttribute("Radius");
                             arrRad2.push(radius2);
 
-                            xCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[0];
+                            xCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
                             xcoord2 = xCoordsRow2.getAttribute("Value");
-                            arrX2.push(xcoord2);
+                            fullArrX2.push(xcoord2);
 
-                            yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[1];
+                            yCoordsRow2 = firstRow2.getElementsByTagName("Dimension")[2];
                             ycoord2 = yCoordsRow2.getAttribute("Value");
-                            arrY2.push(ycoord2);
+                            fullArrY2.push(ycoord2);
+                            if (!isIncluded(fullArrX1, fullArrX2[j]) == true || !isIncluded(fullArrY1, fullArrY2[j]) == true) {
+                                arrX2.push(xcoord2);
+                                
+
+                            }
+                            if (!isIncluded(fullArrY1, fullArrY2[j]) == true || !isIncluded(fullArrX1, fullArrX2[j]) == true) {
+                                arrY2.push(ycoord2);
+                            }
                         }   
 
                         var chartData2 = [];
@@ -177,18 +205,28 @@
                             var arrRad3 = [];
                             var arrY3 = [];
                             var arrX3 = [];
+                            var fullArrX3 = [];
+                            var fullArrY3 = [];
                             for (j = 0; j <y3.length; j++) {
                                 var firstRow3 = xmlDoc3.getElementsByTagName("Field")[j];
                                 var radius3 = firstRow3.getAttribute("Radius");
                                 arrRad3.push(radius3);
 
-                                xCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[0];
+                                xCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[1];
                                 xcoord3 = xCoordsRow3.getAttribute("Value");
-                                arrX3.push(xcoord3);
+                                fullArrX3.push(xcoord3);
 
-                                yCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[1];
+                                yCoordsRow3 = firstRow3.getElementsByTagName("Dimension")[2];
                                 ycoord3 = yCoordsRow3.getAttribute("Value");
-                                arrY3.push(ycoord3);
+                                fullArrY3.push(ycoord3);
+                                if (!isIncluded(fullArrX2, fullArrX3[j]) == true || !isIncluded(fullArrY2, fullArrY3[j]) == true) {
+                                    arrX3.push(xcoord3);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY2, fullArrY3[j]) == true || !isIncluded(fullArrX2, fullArrX3[j]) == true) {
+                                    arrY3.push(ycoord3);
+                                }
                             }   
 
                             var chartData3 = [];
@@ -217,18 +255,28 @@
                             var arrRad4 = [];
                             var arrY4 = [];
                             var arrX4 = [];
+                            var fullArrX4 = [];
+                            var fullArrY4 = [];
                             for (j = 0; j <y4.length; j++) {
                                 var firstRow4 = xmlDoc4.getElementsByTagName("Field")[j];
                                 var radius4 = firstRow4.getAttribute("Radius");
                                 arrRad4.push(radius4);
 
-                                xCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[0];
+                                xCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
                                 xcoord4 = xCoordsRow4.getAttribute("Value");
-                                arrX4.push(xcoord4);
+                                fullArrX4.push(xcoord4);
 
-                                yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[1];
+                                yCoordsRow4 = firstRow4.getElementsByTagName("Dimension")[2];
                                 ycoord4 = yCoordsRow4.getAttribute("Value");
-                                arrY4.push(ycoord4);
+                                fullArrY4.push(ycoord4);
+                                if (!isIncluded(fullArrX3, fullArrX4[j]) == true || !isIncluded(fullArrY3, fullArrY4[j]) == true) {
+                                    arrX4.push(xcoord4);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY3, fullArrY4[j]) == true || !isIncluded(fullArrX3, fullArrX4[j]) == true) {
+                                    arrY4.push(ycoord4);
+                                }
                             }   
 
                             var chartData4 = [];
@@ -257,18 +305,28 @@
                             var arrRad5 = [];
                             var arrY5 = [];
                             var arrX5 = [];
+                            var fullArrX5 = [];
+                            var fullArrY5 = [];
                             for (j = 0; j <y5.length; j++) {
                                 var firstRow5 = xmlDoc5.getElementsByTagName("Field")[j];
                                 var radius5 = firstRow5.getAttribute("Radius");
                                 arrRad5.push(radius5);
 
-                                xCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[0];
+                                xCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
                                 xcoord5 = xCoordsRow5.getAttribute("Value");
-                                arrX5.push(xcoord5);
+                                fullArrX5.push(xcoord5);
 
-                                yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[1];
+                                yCoordsRow5 = firstRow5.getElementsByTagName("Dimension")[2];
                                 ycoord5 = yCoordsRow5.getAttribute("Value");
-                                arrY5.push(ycoord5);
+                                fullArrY5.push(ycoord5);
+                                if (!isIncluded(fullArrX4, fullArrX5[j]) == true || !isIncluded(fullArrY4, fullArrY5[j]) == true) {
+                                    arrX5.push(xcoord5);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY4, fullArrY5[j]) == true || !isIncluded(fullArrX4, fullArrX5[j]) == true) {
+                                    arrY5.push(ycoord5);
+                                }
                             }   
 
                             var chartData5 = [];
@@ -297,18 +355,29 @@
                             var arrRad6 = [];
                             var arrY6 = [];
                             var arrX6 = [];
+                            var fullArrX6 = [];
+                            var fullArrY6 = [];
                             for (j = 0; j <y6.length; j++) {
                                 var firstRow6 = xmlDoc6.getElementsByTagName("Field")[j];
                                 var radius6 = firstRow6.getAttribute("Radius");
                                 arrRad6.push(radius6);
 
-                                xCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[0];
+                                xCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
                                 xcoord6 = xCoordsRow6.getAttribute("Value");
-                                arrX6.push(xcoord6);
+                                fullArrX6.push(xcoord6);
+                                
 
-                                yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[1];
+                                yCoordsRow6 = firstRow6.getElementsByTagName("Dimension")[2];
                                 ycoord6 = yCoordsRow6.getAttribute("Value");
-                                arrY6.push(ycoord6);
+                                fullArrY6.push(ycoord6);
+                                if (!isIncluded(fullArrX5, fullArrX6[j]) == true || !isIncluded(fullArrY5, fullArrY6[j]) == true) {
+                                    arrX6.push(xcoord6);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY5, fullArrY6[j]) == true || !isIncluded(fullArrX5, fullArrX6[j]) == true) {
+                                    arrY6.push(ycoord6);
+                                }
                             }   
 
                             var chartData6 = [];
@@ -337,19 +406,34 @@
                             var arrRad7 = [];
                             var arrY7 = [];
                             var arrX7 = [];
+                            var fullArrX7 = [];
+                            var fullArrY7 = [];
                             for (j = 0; j <y7.length; j++) {
                                 var firstRow7 = xmlDoc7.getElementsByTagName("Field")[j];
                                 var radius7 = firstRow7.getAttribute("Radius");
+                                
+
+                                xCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
+                                xcoord7 = xCoordsRow7.getAttribute("Value");
+                                fullArrX7.push(xcoord7);
                                 arrRad7.push(radius7);
 
-                                xCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[0];
-                                xcoord7 = xCoordsRow7.getAttribute("Value");
-                                arrX7.push(xcoord7);
-
-                                yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[1];
+                                yCoordsRow7 = firstRow7.getElementsByTagName("Dimension")[2];
                                 ycoord7 = yCoordsRow7.getAttribute("Value");
-                                arrY7.push(ycoord7);
-                            }   
+                                fullArrY7.push(ycoord7);
+                                if (!isIncluded(fullArrX6, fullArrX7[j]) == true || !isIncluded(fullArrY6, fullArrY7[j]) == true) {
+                                    arrX7.push(xcoord7);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY6, fullArrY7[j]) == true || !isIncluded(fullArrX6, fullArrX7[j]) == true) {
+                                    arrY7.push(ycoord7);
+                                }
+                            }
+                            
+                            
+                            
+                            
 
                             var chartData7 = [];
                             arrX7.forEach(function(e, i) {
@@ -377,18 +461,28 @@
                             var arrRad8 = [];
                             var arrY8 = [];
                             var arrX8 = [];
+                            var fullArrX8 = [];
+                            var fullArrY8 = [];
                             for (j = 0; j <y8.length; j++) {
                                 var firstRow8 = xmlDoc8.getElementsByTagName("Field")[j];
                                 var radius8 = firstRow8.getAttribute("Radius");
                                 arrRad8.push(radius8);
 
-                                xCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[0];
+                                xCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
                                 xcoord8 = xCoordsRow8.getAttribute("Value");
-                                arrX8.push(xcoord8);
-
-                                yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[1];
+                                fullArrX8.push(xcoord8);
+                         
+                                yCoordsRow8 = firstRow8.getElementsByTagName("Dimension")[2];
                                 ycoord8 = yCoordsRow8.getAttribute("Value");
-                                arrY8.push(ycoord8);
+                                fullArrY8.push(ycoord8);
+                                if (!isIncluded(fullArrX7, fullArrX8[j]) == true || !isIncluded(fullArrY7, fullArrY8[j]) == true) {
+                                    arrX8.push(xcoord8);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY7, fullArrY8[j]) == true || !isIncluded(fullArrX7, fullArrX8[j]) == true) {
+                                    arrY8.push(ycoord8);
+                                }
                             }   
 
                             var chartData8 = [];
@@ -417,18 +511,28 @@
                             var arrRad9 = [];
                             var arrY9 = [];
                             var arrX9 = [];
+                            var fullArrX9 = [];
+                            var fullArrY9 = [];
                             for (j = 0; j <y9.length; j++) {
                                 var firstRow9 = xmlDoc9.getElementsByTagName("Field")[j];
                                 var radius9 = firstRow9.getAttribute("Radius");
                                 arrRad9.push(radius9);
 
-                                xCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[0];
+                                xCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
                                 xcoord9 = xCoordsRow9.getAttribute("Value");
-                                arrX9.push(xcoord9);
+                                fullArrX9.push(xcoord9);
 
-                                yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[1];
+                                yCoordsRow9 = firstRow9.getElementsByTagName("Dimension")[2];
                                 ycoord9 = yCoordsRow9.getAttribute("Value");
-                                arrY9.push(ycoord9);
+                                fullArrY9.push(ycoord9);
+                                if (!isIncluded(fullArrX8, fullArrX9[j]) == true || !isIncluded(fullArrY8, fullArrY9[j]) == true) {
+                                    arrX9.push(xcoord9);
+                                    
+
+                                }
+                                if (!isIncluded(fullArrY8, fullArrY9[j]) == true || !isIncluded(fullArrX8, fullArrX9[j]) == true) {
+                                    arrY9.push(ycoord9);
+                                }
                             }   
 
                             var chartData9 = [];
@@ -450,45 +554,59 @@
                         {
                             label: 'Edges Map Month 3',
                             data: chartData3,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.4)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.4)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         },
                         {
                             label: 'Edges Map Month 4',
                             data: chartData4,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.5)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.5)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
 
                         },
                         {
                             label: 'Edges Map Month 5',
                             data: chartData5,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.6)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         },
                         {
                             label: 'Edges Map Month 6',
                             data: chartData6,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.7)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.7)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         },
                         {
                             label: 'Edges Map Month 7',
                             data: chartData7,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.8)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.8)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         },
                         {
                             label: 'Edges Map Month 8',
                             data: chartData8,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 0.9)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 0.9)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         },
                         {
                             label: 'Edges Map Month 9',
                             data: chartData9,
-                            backgroundColor:"#429bf4",
-                            hoverBackgroundColor: "#429bf4",
+                            backgroundColor:"rgba(66, 155, 244, 1)",
+                            hoverBackgroundColor: "rgba(66, 155, 244, 1)",
+                            borderWidth: 1.5,
+                            borderColor: "rgba(66, 155, 244, 0.8)",
                         }]
                     },
                     options: {
@@ -499,7 +617,7 @@
                                 },
                                 scaleLabel: {
                                         display: true,
-                                        labelString: 'Horizontal'
+                                        labelString: 'Vertical'
                                       }
                             }],
                             xAxes: [{
@@ -508,7 +626,7 @@
                                 },
                                 scaleLabel: {
                                         display: true,
-                                        labelString: 'Perimeter of Object'
+                                        labelString: 'Horizontal'
                                       }
                             }]
                         }
@@ -516,7 +634,12 @@
                 });
             </script> 
             <h2>Individual Charts Months 0 - 9</h2>
-            <canvas id="myEdgesChart0" width="500" height="500"></canvas>    
+            <hr>
+            <div style="overflow-x:auto;">
+            <table>
+            <tr>
+            <td>
+            <canvas id="myEdgesChart0" width="400" height="400"></canvas>    
             <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -538,24 +661,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -566,7 +689,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart0");
                         var myEdgesChart0 = new Chart(ctx, {
                             type: 'bubble',
@@ -576,18 +699,36 @@
                                 {
                                     label: 'Edges Map Month 0',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 0'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -595,8 +736,10 @@
                                 }
                             }
                         });
-                    </script> 
-                <canvas id="myEdgesChart1" width="500" height="500"></canvas>    
+                    </script>
+                    </td>
+                    <td>
+                <canvas id="myEdgesChart1" width="400" height="400"></canvas>    
             <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -618,24 +761,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -646,7 +789,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart1");
                         var myEdgesChart1 = new Chart(ctx, {
                             type: 'bubble',
@@ -656,18 +799,36 @@
                                 {
                                     label: 'Edges Map Month 1',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 1'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -676,7 +837,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart2" width="500" height="500"></canvas>    
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <canvas id="myEdgesChart2" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -698,24 +863,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -726,7 +891,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart2");
                         var myEdgesChart2 = new Chart(ctx, {
                             type: 'bubble',
@@ -736,18 +901,36 @@
                                 {
                                     label: 'Edges Map Month 2',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 2'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -756,7 +939,9 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart3" width="500" height="500"></canvas>    
+                    </td>
+                    <td>
+                    <canvas id="myEdgesChart3" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -778,24 +963,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -806,7 +991,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart3");
                         var myEdgesChart3 = new Chart(ctx, {
                             type: 'bubble',
@@ -816,18 +1001,36 @@
                                 {
                                     label: 'Edges Map Month 3',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 3'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -836,7 +1039,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart4" width="500" height="500"></canvas>    
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <canvas id="myEdgesChart4" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -858,24 +1065,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -886,7 +1093,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart4");
                         var myEdgesChart4 = new Chart(ctx, {
                             type: 'bubble',
@@ -896,18 +1103,36 @@
                                 {
                                     label: 'Edges Map Month 4',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 4'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -916,7 +1141,9 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart5" width="500" height="500"></canvas>    
+                    </td>
+                    <td>
+                    <canvas id="myEdgesChart5" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -938,24 +1165,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -966,7 +1193,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart5");
                         var myEdgesChart5 = new Chart(ctx, {
                             type: 'bubble',
@@ -976,18 +1203,36 @@
                                 {
                                     label: 'Edges Map Month 5',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 5'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -996,7 +1241,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart6" width="500" height="500"></canvas>    
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <canvas id="myEdgesChart6" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -1018,24 +1267,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1046,7 +1295,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart6");
                         var myEdgesChart6 = new Chart(ctx, {
                             type: 'bubble',
@@ -1056,18 +1305,36 @@
                                 {
                                     label: 'Edges Map Month 6',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 6'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1076,7 +1343,9 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart7" width="500" height="500"></canvas>    
+                    </td>
+                    <td>
+                    <canvas id="myEdgesChart7" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -1098,24 +1367,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1126,7 +1395,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart7");
                         var myEdgesChart7 = new Chart(ctx, {
                             type: 'bubble',
@@ -1136,18 +1405,36 @@
                                 {
                                     label: 'Edges Map Month 7',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 7'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1156,7 +1443,11 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart8" width="500" height="500"></canvas>    
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <canvas id="myEdgesChart8" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -1178,24 +1469,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1206,7 +1497,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart8");
                         var myEdgesChart8 = new Chart(ctx, {
                             type: 'bubble',
@@ -1216,18 +1507,36 @@
                                 {
                                     label: 'Edges Map Month 8',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 8'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1236,7 +1545,9 @@
                             }
                         });
                     </script>
-                    <canvas id="myEdgesChart9" width="500" height="500"></canvas>    
+                    </td>
+                    <td>
+                    <canvas id="myEdgesChart9" width="400" height="400"></canvas>    
                     <script>
                 if (window.XMLHttpRequest)
                            {    // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -1258,24 +1569,24 @@
                         for (i = 0; i < y.length; i++) {
                             var firstRow = xmlDoc.getElementsByTagName("Field")[i];
                             var radius = firstRow.getAttribute("Radius");
-                            console.log(radius);
+                            
                             arrRad.push(radius);
 
-                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[0];
+                            xCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
                             xcoord = xCoordsRow.getAttribute("Value");
-                            console.log(xcoord);
+                            
                             arrX.push(xcoord);
 
-                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[1];
+                            yCoordsRow = firstRow.getElementsByTagName("Dimension")[2];
                             ycoord = yCoordsRow.getAttribute("Value");
-                            console.log(ycoord);
+                            
                             arrY.push(ycoord);
                         }   
-                        console.log(arrX);
-                        console.log(arrY);
-                        console.log(arrRad);
+                        
+                        
+                        
                         var data = arrX.concat(arrY, arrRad);
-                        console.log(data);
+                        
 
                         var chartData = [];
                         arrX.forEach(function(e, i) {
@@ -1286,7 +1597,7 @@
                         });
                       });
 
-                        console.log(chartData);
+                        
                         var ctx = document.getElementById("myEdgesChart9");
                         var myEdgesChart9 = new Chart(ctx, {
                             type: 'bubble',
@@ -1296,18 +1607,36 @@
                                 {
                                     label: 'Edges Map Month 9',
                                     data: chartData,
-                                    backgroundColor:"#429bf4",
-                                    hoverBackgroundColor: "#429bf4",
+                                    backgroundColor:"rgba(66, 155, 244, 0.6)",
+                                    hoverBackgroundColor: "rgba(66, 155, 244, 0.6)",
+                                    borderWidth: 1.5,
+                                    borderColor: "rgba(66, 155, 244, 0.8)",
                                 }]
                             },
                             options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                            display: true,
+                                            text: 'Edge Map Month 9'
+                                        },
                                 scales: {
                                     yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Vertical'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
                                     }],
                                     xAxes: [{
+
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Horizontal'
+                                        },
                                         ticks: {
                                             beginAtZero:true
                                         }
@@ -1315,7 +1644,11 @@
                                 }
                             }
                         });
-                    </script>   
+                    </script>
+                    </td>
+                    </tr>
+                    </table>
+                    </div> 
 
                 </div>
 
