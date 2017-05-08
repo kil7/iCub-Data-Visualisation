@@ -2,7 +2,9 @@
 Visualisation of Aberystwyth University iCub robot data.
 
 Parent directory contains all HTML pages, simply open index.html in a browser to view the piece of work.
-All libraries are included in this distribution, so it is not necessary to have an internet connection to view this.
+All libraries are included in this distribution, although you will need a web server set up on your local machine to view the output.
+
+Another apption is to go to http://localhost/~kieranlynch/mmp/ where the work is currently hosted.
 
 Sub directory structure is as follows:
   datasets - contains examples of both the constrained and unconstrained datasets.
