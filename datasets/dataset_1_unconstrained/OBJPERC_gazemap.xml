@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cartesian.xsd">
+	<Map Index="0" DefaultRadius="10.000000" Dimensions="2">
+		<Dimension Min="-100.000000" Max="100.000000" />
+		<Dimension Min="-100.000000" Max="100.000000" />
+		<Field Index="6" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="-23.574945" />
+			<Dimension Value="6.488665" />
+		</Field>
+		<FieldContainer Index="6" Dimensions="5">
+			<Dimension Value="1460638311.000000" />
+			<Dimension Value="136.074424" />
+			<Dimension Value="8.000000" />
+			<Dimension Value="11.000000" />
+			<Dimension Value="88.000000" />
+		</FieldContainer>
+		<Field Index="13" Radius="10.000000" Usage="9" Linked="1">
+			<Dimension Value="22.066483" />
+			<Dimension Value="-4.458625" />
+		</Field>
+		<FieldContainer Index="13" Dimensions="7">
+			<Dimension Value="1460639979.000000" />
+			<Dimension Value="52.068608" />
+			<Dimension Value="15.000000" />
+			<Dimension Value="18.000000" />
+			<Dimension Value="91.000000" />
+			<Dimension Value="128.000000" />
+			<Dimension Value="188.000000" />
+		</FieldContainer>
+		<Field Index="20" Radius="10.000000" Usage="9" Linked="1">
+			<Dimension Value="-10.835077" />
+			<Dimension Value="-14.692465" />
+		</Field>
+		<FieldContainer Index="20" Dimensions="9">
+			<Dimension Value="1460639885.000000" />
+			<Dimension Value="333.452817" />
+			<Dimension Value="22.000000" />
+			<Dimension Value="24.000000" />
+			<Dimension Value="27.000000" />
+			<Dimension Value="29.000000" />
+			<Dimension Value="45.000000" />
+			<Dimension Value="140.000000" />
+			<Dimension Value="237.000000" />
+		</FieldContainer>
+		<Field Index="31" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="19.571380" />
+			<Dimension Value="-75.550716" />
+		</Field>
+		<FieldContainer Index="31" Dimensions="3">
+			<Dimension Value="1460637730.000000" />
+			<Dimension Value="20.677019" />
+			<Dimension Value="33.000000" />
+		</FieldContainer>
+		<Field Index="35" Radius="10.000000" Usage="13" Linked="1">
+			<Dimension Value="21.768614" />
+			<Dimension Value="-17.747207" />
+		</Field>
+		<FieldContainer Index="35" Dimensions="11">
+			<Dimension Value="1460640340.000000" />
+			<Dimension Value="16.321980" />
+			<Dimension Value="37.000000" />
+			<Dimension Value="40.000000" />
+			<Dimension Value="42.000000" />
+			<Dimension Value="51.000000" />
+			<Dimension Value="80.000000" />
+			<Dimension Value="142.000000" />
+			<Dimension Value="160.000000" />
+			<Dimension Value="166.000000" />
+			<Dimension Value="239.000000" />
+		</FieldContainer>
+		<Field Index="46" Radius="10.000000" Usage="2" Linked="1">
+			<Dimension Value="11.993347" />
+			<Dimension Value="18.475795" />
+		</Field>
+		<FieldContainer Index="46" Dimensions="7">
+			<Dimension Value="1460638581.000000" />
+			<Dimension Value="514.403546" />
+			<Dimension Value="48.000000" />
+			<Dimension Value="83.000000" />
+			<Dimension Value="85.000000" />
+			<Dimension Value="113.000000" />
+			<Dimension Value="119.000000" />
+		</FieldContainer>
+		<Field Index="53" Radius="10.000000" Usage="2" Linked="1">
+			<Dimension Value="60.661527" />
+			<Dimension Value="23.695056" />
+		</Field>
+		<FieldContainer Index="53" Dimensions="3">
+			<Dimension Value="1460638809.000000" />
+			<Dimension Value="16.864393" />
+			<Dimension Value="55.000000" />
+		</FieldContainer>
+		<Field Index="56" Radius="10.000000" Usage="7" Linked="1">
+			<Dimension Value="-26.816318" />
+			<Dimension Value="-23.504864" />
+		</Field>
+		<FieldContainer Index="56" Dimensions="8">
+			<Dimension Value="1460639912.000000" />
+			<Dimension Value="16.751657" />
+			<Dimension Value="58.000000" />
+			<Dimension Value="61.000000" />
+			<Dimension Value="70.000000" />
+			<Dimension Value="144.000000" />
+			<Dimension Value="216.000000" />
+			<Dimension Value="221.000000" />
+		</FieldContainer>
+		<Field Index="63" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="-38.563662" />
+			<Dimension Value="6.886088" />
+		</Field>
+		<FieldContainer Index="63" Dimensions="4">
+			<Dimension Value="1460637984.000000" />
+			<Dimension Value="119.744586" />
+			<Dimension Value="65.000000" />
+			<Dimension Value="67.000000" />
+		</FieldContainer>
+		<Field Index="72" Radius="10.000000" Usage="9" Linked="1">
+			<Dimension Value="34.670218" />
+			<Dimension Value="12.329424" />
+		</Field>
+		<FieldContainer Index="72" Dimensions="10">
+			<Dimension Value="1460640052.000000" />
+			<Dimension Value="29.769694" />
+			<Dimension Value="74.000000" />
+			<Dimension Value="77.000000" />
+			<Dimension Value="104.000000" />
+			<Dimension Value="107.000000" />
+			<Dimension Value="122.000000" />
+			<Dimension Value="131.000000" />
+			<Dimension Value="134.000000" />
+			<Dimension Value="191.000000" />
+		</FieldContainer>
+		<Field Index="93" Radius="10.000000" Usage="2" Linked="1">
+			<Dimension Value="-41.552438" />
+			<Dimension Value="18.603074" />
+		</Field>
+		<FieldContainer Index="93" Dimensions="6">
+			<Dimension Value="1460638320.000000" />
+			<Dimension Value="254.947890" />
+			<Dimension Value="95.000000" />
+			<Dimension Value="98.000000" />
+			<Dimension Value="101.000000" />
+			<Dimension Value="137.000000" />
+		</FieldContainer>
+		<Field Index="108" Radius="10.000000" Usage="2" Linked="1">
+			<Dimension Value="-54.205321" />
+			<Dimension Value="9.840066" />
+		</Field>
+		<FieldContainer Index="108" Dimensions="6">
+			<Dimension Value="1460638421.000000" />
+			<Dimension Value="29.292194" />
+			<Dimension Value="110.000000" />
+			<Dimension Value="116.000000" />
+			<Dimension Value="168.000000" />
+			<Dimension Value="231.000000" />
+		</FieldContainer>
+		<Field Index="124" Radius="10.000000" Usage="4" Linked="1">
+			<Dimension Value="24.895956" />
+			<Dimension Value="-37.779013" />
+		</Field>
+		<FieldContainer Index="124" Dimensions="4">
+			<Dimension Value="1460640069.000000" />
+			<Dimension Value="556.329966" />
+			<Dimension Value="126.000000" />
+			<Dimension Value="248.000000" />
+		</FieldContainer>
+		<Field Index="146" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="-72.627334" />
+			<Dimension Value="-4.230604" />
+		</Field>
+		<FieldContainer Index="146" Dimensions="5">
+			<Dimension Value="1460638785.000000" />
+			<Dimension Value="135.280649" />
+			<Dimension Value="148.000000" />
+			<Dimension Value="150.000000" />
+			<Dimension Value="186.000000" />
+		</FieldContainer>
+		<Field Index="152" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="-50.054970" />
+			<Dimension Value="-57.845105" />
+		</Field>
+		<FieldContainer Index="152" Dimensions="3">
+			<Dimension Value="1460638877.000000" />
+			<Dimension Value="34.271699" />
+			<Dimension Value="154.000000" />
+		</FieldContainer>
+		<Field Index="155" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="-71.116364" />
+			<Dimension Value="-26.677861" />
+		</Field>
+		<FieldContainer Index="155" Dimensions="7">
+			<Dimension Value="1460640133.000000" />
+			<Dimension Value="-41.344605" />
+			<Dimension Value="157.000000" />
+			<Dimension Value="183.000000" />
+			<Dimension Value="218.000000" />
+			<Dimension Value="244.000000" />
+			<Dimension Value="246.000000" />
+		</FieldContainer>
+		<Field Index="161" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="45.343582" />
+			<Dimension Value="-32.115822" />
+		</Field>
+		<FieldContainer Index="161" Dimensions="4">
+			<Dimension Value="1460639811.000000" />
+			<Dimension Value="152.984995" />
+			<Dimension Value="163.000000" />
+			<Dimension Value="199.000000" />
+		</FieldContainer>
+		<Field Index="169" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="76.067070" />
+			<Dimension Value="0.930518" />
+		</Field>
+		<FieldContainer Index="169" Dimensions="3">
+			<Dimension Value="1460639075.000000" />
+			<Dimension Value="5608.354508" />
+			<Dimension Value="171.000000" />
+		</FieldContainer>
+		<Field Index="172" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="-12.230444" />
+			<Dimension Value="-56.348657" />
+		</Field>
+		<FieldContainer Index="172" Dimensions="5">
+			<Dimension Value="1460639629.000000" />
+			<Dimension Value="10000000.000000" />
+			<Dimension Value="174.000000" />
+			<Dimension Value="176.000000" />
+			<Dimension Value="213.000000" />
+		</FieldContainer>
+		<Field Index="177" Radius="10.000000" Usage="4" Linked="1">
+			<Dimension Value="46.462188" />
+			<Dimension Value="-18.174247" />
+		</Field>
+		<FieldContainer Index="177" Dimensions="5">
+			<Dimension Value="1460639828.000000" />
+			<Dimension Value="18.865280" />
+			<Dimension Value="179.000000" />
+			<Dimension Value="181.000000" />
+			<Dimension Value="194.000000" />
+		</FieldContainer>
+		<Field Index="195" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="52.334981" />
+			<Dimension Value="17.503065" />
+		</Field>
+		<FieldContainer Index="195" Dimensions="4">
+			<Dimension Value="1460639460.000000" />
+			<Dimension Value="78.560770" />
+			<Dimension Value="197.000000" />
+			<Dimension Value="210.000000" />
+		</FieldContainer>
+		<Field Index="201" Radius="10.000000" Usage="3" Linked="1">
+			<Dimension Value="-40.809608" />
+			<Dimension Value="-19.045120" />
+		</Field>
+		<FieldContainer Index="201" Dimensions="5">
+			<Dimension Value="1460639790.000000" />
+			<Dimension Value="-27.441718" />
+			<Dimension Value="203.000000" />
+			<Dimension Value="206.000000" />
+			<Dimension Value="208.000000" />
+		</FieldContainer>
+		<Field Index="223" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="-35.776077" />
+			<Dimension Value="-73.252533" />
+		</Field>
+		<FieldContainer Index="223" Dimensions="5">
+			<Dimension Value="1460639752.000000" />
+			<Dimension Value="-10.386250" />
+			<Dimension Value="225.000000" />
+			<Dimension Value="227.000000" />
+			<Dimension Value="229.000000" />
+		</FieldContainer>
+		<Field Index="232" Radius="10.000000" Usage="1" Linked="1">
+			<Dimension Value="28.429025" />
+			<Dimension Value="3.449701" />
+		</Field>
+		<FieldContainer Index="232" Dimensions="3">
+			<Dimension Value="1460639872.000000" />
+			<Dimension Value="2479.894873" />
+			<Dimension Value="234.000000" />
+		</FieldContainer>
+		<Field Index="240" Radius="10.000000" Usage="4" Linked="1">
+			<Dimension Value="-12.766404" />
+			<Dimension Value="-24.979755" />
+		</Field>
+		<FieldContainer Index="240" Dimensions="3">
+			<Dimension Value="1460640318.000000" />
+			<Dimension Value="75.290404" />
+			<Dimension Value="242.000000" />
+		</FieldContainer>
+	</Map>
+</root>
